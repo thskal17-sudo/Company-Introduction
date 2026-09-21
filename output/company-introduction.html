@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>샘플교육컴퍼니 회사소개서</title>
+<title>한국엑스퍼트교육원 회사소개서</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -55,7 +55,7 @@
   .section-title {
     font-size: 20pt;
     color: var(--brand);
-    margin-bottom: 8mm;
+    margin-bottom: 7mm;
     padding-bottom: 3mm;
     border-bottom: 3px solid var(--brand);
     display: flex;
@@ -99,28 +99,41 @@
   .cover .cover-foot { display: flex; justify-content: space-between; font-size: 9.5pt; opacity: .9; }
 
   /* ---- Stats ---- */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin: 8mm 0; }
-  .stat { background: var(--bg); border-radius: 8px; padding: 6mm 4mm; text-align: center; border-top: 4px solid var(--accent); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin: 6mm 0; }
+  .stat { background: var(--bg); border-radius: 8px; padding: 5mm 4mm; text-align: center; border-top: 4px solid var(--accent); }
   .stat .value { white-space: nowrap; font-size: 19pt; font-weight: 900; color: var(--brand); line-height: 1.1; }
   .stat .label { font-size: 9.5pt; color: var(--muted); margin-top: 2mm; }
 
   /* ---- Mission / vision ---- */
-  .mv { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 8mm; }
-  .mv .box { background: var(--brand); color: #fff; border-radius: 8px; padding: 6mm; }
+  .mv { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 2mm; }
+  .mv .box { background: var(--brand); color: #fff; border-radius: 8px; padding: 5mm 6mm; }
   .mv .box.alt { background: color-mix(in srgb, var(--brand) 12%, white); color: var(--ink); }
   .mv .kicker { font-size: 9pt; letter-spacing: .2em; opacity: .8; margin-bottom: 2mm; }
   .mv .text { font-size: 12.5pt; font-weight: 500; line-height: 1.5; }
 
+  /* ---- Greeting ---- */
+  .greeting { background: var(--bg); border-left: 5px solid var(--accent); border-radius: 0 8px 8px 0; padding: 5mm 7mm; margin-bottom: 6mm; }
+  .greeting .g-title { font-size: 9pt; letter-spacing: .2em; color: var(--muted); margin-bottom: 2mm; }
+  .greeting p { font-size: 10.5pt; }
+  .greeting .signer { text-align: right; font-weight: 700; margin-top: 3mm; color: var(--brand); }
+
+  /* ---- Strategies ---- */
+  .strategies { display: grid; grid-template-columns: repeat(auto-fit, minmax(30mm, 1fr)); gap: 4mm; margin-top: 2mm; }
+  .strategy { text-align: center; }
+  .strategy .circle { width: 30mm; height: 30mm; border-radius: 50%; margin: 0 auto 2mm; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10pt; line-height: 1.25; padding: 2mm; word-break: keep-all; text-align: center; }
+  .strategy:nth-child(even) .circle { background: var(--brand); }
+  .strategy p { font-size: 9pt; color: var(--muted); }
+
   /* ---- Values ---- */
-  .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5mm; }
-  .value { border: 1px solid var(--line); border-radius: 8px; padding: 5mm 6mm; }
+  .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .value { border: 1px solid var(--line); border-radius: 8px; padding: 4mm 5mm; }
   .value .num { font-size: 9pt; color: var(--accent); font-weight: 700; letter-spacing: .1em; }
   .value h3 { font-size: 12.5pt; color: var(--brand); margin: 1mm 0 2mm; }
   .value p { font-size: 10pt; color: var(--muted); }
 
   /* ---- History ---- */
   .timeline { list-style: none; margin: 0; padding: 0 0 0 6mm; border-left: 2px solid var(--line); }
-  .timeline li { position: relative; padding: 0 0 6mm 8mm; }
+  .timeline li { position: relative; padding: 0 0 4mm 8mm; }
   .timeline li::before {
     content: ""; position: absolute; left: -7.5mm; top: 2.2mm; width: 11px; height: 11px; border-radius: 50%;
     background: var(--accent); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--accent);
@@ -172,7 +185,7 @@
   .closing { background: var(--brand); color: #fff; border-radius: 10px; padding: 8mm 10mm; text-align: center; margin-top: 7mm; }
   .closing h2 { font-size: 18pt; }
   .closing p { font-size: 11pt; opacity: .9; margin-top: 3mm; }
-  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 10mm; margin-top: 6mm; font-size: 10.5pt; }
+  .contact { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm 8mm; margin-top: 6mm; font-size: 10pt; }
   .contact .k { font-size: 9pt; color: var(--muted); letter-spacing: .05em; }
   .contact .v { font-weight: 500; }
 
@@ -188,95 +201,78 @@
 
 <section class="page cover">
   <div class="logo-box">
-<span class="logo-text">샘플교육컴퍼니</span>  </div>
+<span class="logo-text">한국엑스퍼트교육원</span>  </div>
   <div class="cover-body">
     <span class="doc-kind">회사소개서</span>
-    <h1>샘플교육컴퍼니</h1>
-<div class="name-en">Sample Education Company</div>    <div class="accent-bar"></div>
-<div class="slogan">배움이 성장이 되는 곳</div><div class="tagline">기업 맞춤형 교육 · 강사 양성 · 조직문화 컨설팅</div>  </div>
+    <h1>한국엑스퍼트교육원</h1>
+<div class="name-en">Korea Expert Education Institute</div>    <div class="accent-bar"></div>
+<div class="tagline">학생에 맞춘 혁신적인 경력과 창업 교육을 지원합니다</div>  </div>
   <div class="cover-foot">
-    <span>https://www.example.com</span>
+    <span></span>
     <span>2026. 09</span>
   </div>
 </section>
 
 <section class="page">
   <h2 class="section-title">회사 소개 <small>About Us</small></h2>
-  <div class="lead">
-<p>샘플교육컴퍼니는 2018년 설립 이래 기업과 기관을 대상으로 실무 중심의 교육 프로그램을 제공해 온 교육 전문 기업입니다. 현장에서 바로 활용할 수 있는 커리큘럼과 검증된 강사진을 바탕으로 지금까지 300여 개 기업, 2만 명 이상의 수강생과 함께했습니다.</p><p>우리는 교육이 단순한 지식 전달이 아니라 개인과 조직의 실질적인 변화를 만드는 과정이라고 믿습니다. 고객사의 상황을 깊이 이해하고, 목표에 맞는 맞춤형 과정을 설계합니다.</p>  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="value">300+</div><div class="label">누적 교육 기업</div></div>
-    <div class="stat"><div class="value">20,000+</div><div class="label">누적 수강생</div></div>
-    <div class="stat"><div class="value">4.8 / 5.0</div><div class="label">교육 만족도</div></div>
-    <div class="stat"><div class="value">87%</div><div class="label">재계약률</div></div>
-  </div>
-
-  <div class="mv">
-<div class="box"><div class="kicker">MISSION</div><div class="text">실무에서 통하는 교육으로 사람과 조직의 성장을 돕습니다.</div></div><div class="box alt"><div class="kicker">VISION</div><div class="text">대한민국 기업 교육의 기준이 되는 교육 파트너</div></div>  </div>
-
-  <div class="contact" style="margin-top:10mm">
-<div><div class="k">설립</div><div class="v">2018년 3월</div></div><div><div class="k">대표</div><div class="v">홍길동</div></div><div><div class="k">주소</div><div class="v">서울특별시 강남구 테헤란로 123, 10층</div></div>  </div>
-  <div class="page-footer"><span>샘플교육컴퍼니</span><span>회사소개서</span></div>
-</section>
-
-<section class="page">
-  <h2 class="section-title">핵심 가치 <small>Core Values</small></h2>
+  <div class="greeting">
+    <div class="g-title">GREETING</div>
+<p>안녕하십니까, 한국엑스퍼트교육원입니다.</p><p>2025년을 지나며 생성형 AI는 단순한 &#39;학습 도구&#39;가 아니라 모든 산업의 표준 도구가 되었습니다. 중요한 것은 AI 기술을 배우는 것 자체가 아니라, 실제 현장에서 이를 어떻게 성과로 연결하느냐입니다.</p><p>저희는 현장의 경험을 살려 학생들의 취업 역량을 높이는 실무 프로그램을 제공합니다. 학생들이 자신의 진로에 자신감을 갖고 현장에서 환영받는 인재로 성장하도록 돕는 가장 든든한 교육 파트너가 되겠습니다.</p><div class="signer">한국엑스퍼트교육원 대표 박서현</div>  </div>
+    <h2 class="section-title" style="margin-top:8mm">핵심 가치 <small>Core Values</small></h2>
   <div class="values">
     <div class="value">
-      <div class="num">01</div>
-      <h3>현장 중심</h3>
-      <p>이론보다 현장에서 바로 쓰이는 실무 역량에 집중합니다.</p>
+      <div class="num">01 · PRACTICALITY</div>
+      <h3>실무 즉시성</h3>
+      <p>현장에서 바로 활용되는 학생의 실제 역량을 중점적으로 강화합니다.</p>
     </div>
     <div class="value">
-      <div class="num">02</div>
-      <h3>맞춤 설계</h3>
-      <p>고객사의 과제와 조직 문화에 맞춰 과정을 새로 설계합니다.</p>
+      <div class="num">02 · OUTPUT</div>
+      <h3>결과물 중심</h3>
+      <p>지루한 이론 학습에서 벗어나 새로운 스킬을 배우고, 하나의 완성된 결과물을 직접 만들어 갑니다.</p>
     </div>
     <div class="value">
-      <div class="num">03</div>
-      <h3>검증된 강사진</h3>
-      <p>10년 이상의 실무 경력과 강의 경험을 갖춘 전문가가 진행합니다.</p>
-    </div>
-    <div class="value">
-      <div class="num">04</div>
-      <h3>성과 관리</h3>
-      <p>교육 전후 진단과 사후 코칭으로 학습 효과를 끝까지 책임집니다.</p>
+      <div class="num">03 · DIGITAL LITERACY</div>
+      <h3>디지털 기초 소양</h3>
+      <p>AI 시대에 필요한 디지털 도구 활용 능력을 기초부터 탄탄하게 다집니다.</p>
     </div>
   </div>
 
-  <h2 class="section-title" style="margin-top:12mm">연혁 <small>History</small></h2>
-  <ul class="timeline">
-    <li><div class="year">2018</div><div class="event">샘플교육컴퍼니 설립</div></li>
-    <li><div class="year">2019</div><div class="event">기업 맞춤형 리더십 과정 출시, 첫 해 30개 기업 교육</div></li>
-    <li><div class="year">2021</div><div class="event">온라인 교육 플랫폼 오픈, 누적 수강생 5,000명 돌파</div></li>
-    <li><div class="year">2023</div><div class="event">강사 양성 아카데미 개설, 고용노동부 사업주 훈련 위탁기관 선정</div></li>
-    <li><div class="year">2025</div><div class="event">누적 교육 기업 300개 돌파</div></li>
-  </ul>
-  <div class="page-footer"><span>샘플교육컴퍼니</span><span>회사소개서</span></div>
+  <h2 class="section-title" style="margin-top:8mm">전략 방향 <small>Strategic Direction</small></h2>
+  <div class="strategies">
+    <div class="strategy"><div class="circle">마이크로 러닝</div><p>짧고 집중된 단위 학습</p></div>
+    <div class="strategy"><div class="circle">게이미피케이션</div><p>게임 요소로 몰입도 향상</p></div>
+    <div class="strategy"><div class="circle">비주얼 우선</div><p>이미지·영상 중심 학습</p></div>
+    <div class="strategy"><div class="circle">팀 협업 구조</div><p>팀 프로젝트 기반 수업</p></div>
+  </div>
+
+
+
+
+  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 
+
 <section class="page">
-  <h2 class="section-title">교육 프로그램 <small>Programs &amp; Services</small></h2>
-  <div class="programs">
+  <h2 class="section-title">AI 투어 메이커 프로그램 <small>AI Tour Maker Programs</small></h2>
+<p class="lead" style="margin-bottom:5mm">기초부터 실전 취업까지, 관광고등학교 맞춤형 3단계 성장 로드맵</p>  <div class="programs">
     <div class="program">
-      <h3>리더십 &amp; 조직관리</h3>
-<div class="summary">팀장·임원급을 위한 실전 리더십 과정</div>      <div class="meta">
-<span>대상 <b>신임 팀장, 중간관리자, 임원</b></span><span>시간 <b>8시간 (1일) ~ 16시간 (2일)</b></span>      </div>
-<ul><li>성과 코칭 대화법과 피드백 실습</li><li>세대 간 소통과 갈등 관리</li><li>교육 후 1:1 코칭 세션 제공</li></ul>    </div>
+      <h3>[1학년] AI 워밍업 (Explore)</h3>
+<div class="summary">생성형 AI와 친해지고 나의 관광 진로를 탐색하는 단계</div>      <div class="meta">
+<span>대상 <b>관광고등학교 1학년</b></span>      </div>
+<ul><li>M1. AI 첫 만남 &amp; 프롬프트 놀이 — 생성형 AI 활용 미니 게임과 &#39;말로 그림 그리기&#39; 학습</li><li>M2. 나의 관광 직업 지도 — AI 커리어 코치와 적성·흥미 대화 기반 직업 추천</li></ul>    </div>
     <div class="program">
-      <h3>비즈니스 커뮤니케이션</h3>
-<div class="summary">보고·회의·프레젠테이션 역량 강화</div>      <div class="meta">
-<span>대상 <b>전 직급</b></span><span>시간 <b>8시간</b></span>      </div>
-<ul><li>한 장 보고서 작성법</li><li>설득력 있는 프레젠테이션 실습</li><li>실제 업무 자료로 진행하는 워크숍</li></ul>    </div>
+      <h3>[2학년] AI 실무 장착 (Apply)</h3>
+<div class="summary">AI로 실제 관광 상품과 홍보물을 기획·제작하는 단계</div>      <div class="meta">
+<span>대상 <b>관광고등학교 2학년</b></span>      </div>
+<ul><li>M1. 여행 상품 기획 — &#39;퍼스널 트래블 디자이너&#39; 맞춤형 일정 설계 → 맞춤 여행상품 기획서</li><li>M2. 프리미엄 여행 포토 — AI 사진 편집·마케팅 이미지 제작 → 시그니처 홍보물</li></ul>    </div>
     <div class="program">
-      <h3>강사 양성 과정 (TTT)</h3>
-<div class="summary">사내 강사와 전문 강사를 위한 교수법 과정</div>      <div class="meta">
-<span>대상 <b>사내 강사, 예비 전문 강사</b></span><span>시간 <b>24시간 (3일)</b></span>      </div>
-<ul><li>교안 설계와 커리큘럼 개발</li><li>강의 시연과 전문가 피드백</li><li>수료 후 강사 네트워크 지원</li></ul>    </div>
+      <h3>[3학년] AI 취업 출격</h3>
+<div class="summary">취업 서류와 면접을 AI로 준비하는 실전 단계</div>      <div class="meta">
+<span>대상 <b>관광고등학교 3학년</b></span>      </div>
+<ul><li>M1. AI 자기소개서·면접 코칭 — 취업 맞춤형 경력 작성과 모의 면접</li></ul>    </div>
   </div>
 
-  <div class="page-footer"><span>샘플교육컴퍼니</span><span>회사소개서</span></div>
+  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 
 <section class="page">
@@ -284,55 +280,24 @@
   <div class="instructor">
 <div class="avatar">홍</div>    <div>
       <h3>홍길동</h3>
-<div class="role">대표 강사 / 대표이사</div><div class="tags"><span class="tag">리더십</span><span class="tag">조직문화</span><span class="tag">성과 코칭</span></div><div class="quote">“교육은 사람을 바꾸고, 사람은 조직을 바꿉니다.”</div><div class="bio"><p>대기업 인사팀과 교육 컨설팅 회사를 거쳐 15년간 리더십과 조직문화 분야에서 강의해 왔습니다. 연간 100회 이상의 기업 강의를 진행하고 있으며, 실무 사례 중심의 강의로 높은 만족도를 받고 있습니다.</p></div>      <div class="cols">
-<div><h4>주요 경력</h4><ul><li>現 샘플교육컴퍼니 대표이사</li><li>前 ○○그룹 인재개발원 교육 담당</li><li>前 ○○컨설팅 수석 컨설턴트</li></ul></div>        <div>
-<h4>학력</h4><ul><li>○○대학교 경영학 석사</li></ul><h4 style="margin-top:2mm">자격</h4><ul><li>국제코치연맹(ICF) PCC</li><li>직업능력개발훈련교사 2급</li></ul>        </div>
+<div class="role">대표 강사</div><div class="tags"><span class="tag">생성형 AI 활용</span><span class="tag">진로·취업 코칭</span></div><div class="quote">“교육은 사람을 바꾸고, 사람은 조직을 바꿉니다.”</div><div class="bio"><p>(샘플) 15년간 교육 분야에서 강의해 왔습니다. 연간 100회 이상의 강의를 진행하고 있습니다.</p></div>      <div class="cols">
+<div><h4>주요 경력</h4><ul><li>現 한국엑스퍼트교육원 대표 강사</li><li>前 ○○ 교육 담당</li></ul></div>        <div>
+<h4>학력</h4><ul><li>○○대학교 ○○학과</li></ul><h4 style="margin-top:2mm">자격</h4><ul><li>○○ 자격</li></ul>        </div>
       </div>
     </div>
   </div>
-  <div class="instructor">
-<div class="avatar">김</div>    <div>
-      <h3>김영희</h3>
-<div class="role">수석 강사</div><div class="tags"><span class="tag">프레젠테이션</span><span class="tag">비즈니스 커뮤니케이션</span><span class="tag">보고서 작성</span></div><div class="quote">“잘 말하는 사람이 아니라, 잘 전달하는 사람을 만듭니다.”</div><div class="bio"><p>방송사 아나운서 출신으로 12년간 스피치와 비즈니스 커뮤니케이션 분야에서 강의하고 있습니다. 공공기관과 대기업을 중심으로 프레젠테이션 코칭을 진행합니다.</p></div>      <div class="cols">
-<div><h4>주요 경력</h4><ul><li>現 샘플교육컴퍼니 수석 강사</li><li>前 ○○방송 아나운서</li></ul></div>        <div>
-<h4>학력</h4><ul><li>○○대학교 신문방송학 학사</li></ul><h4 style="margin-top:2mm">자격</h4><ul><li>스피치 지도사 1급</li></ul>        </div>
-      </div>
-    </div>
-  </div>
-  <div class="page-footer"><span>샘플교육컴퍼니</span><span>회사소개서</span></div>
+  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 
 <section class="page">
-    <h2 class="section-title" >차별화 포인트 <small>Why Us</small></h2>
-  <div class="strengths">
-    <div class="strength">
-      <div class="icon">1</div>
-      <div><h3>사전 진단 기반 커스터마이징</h3><p>교육 전 설문·인터뷰로 조직의 이슈를 파악하고 사례를 과정에 반영합니다.</p></div>
-    </div>
-    <div class="strength">
-      <div class="icon">2</div>
-      <div><h3>실습 비중 60% 이상</h3><p>강의보다 토론·롤플레이·워크숍 중심으로 체득하도록 설계합니다.</p></div>
-    </div>
-    <div class="strength">
-      <div class="icon">3</div>
-      <div><h3>사후 관리 프로그램</h3><p>교육 후 4주간 실천 과제와 코칭으로 현업 적용을 돕습니다.</p></div>
-    </div>
-  </div>
 
-  <h2 class="section-title" style="margin-top:10mm">주요 고객사 <small>Clients &amp; Partners</small></h2>
-  <div class="clients"><div class="client">○○전자</div><div class="client">○○은행</div><div class="client">○○공사</div><div class="client">○○대학교</div><div class="client">○○제약</div><div class="client">○○물류</div></div>
-
-  <div class="testimonials">
-    <div class="testimonial"><div class="q">“교육이 끝난 뒤에도 실천 과제를 챙겨주셔서 현업에서 실제 변화가 있었습니다.”</div><div class="a">— ○○전자 인재개발팀 김OO 팀장</div></div>
-    <div class="testimonial"><div class="q">“우리 회사 사례로 진행해 주셔서 몰입도가 완전히 달랐습니다.”</div><div class="a">— ○○은행 교육담당 이OO 과장</div></div>
-  </div>
 
   <div class="closing">
-<h2>함께 성장할 파트너를 찾고 계신가요?</h2><p>교육 목적과 대상만 알려주시면 48시간 내에 맞춤 제안서를 보내드립니다.</p>  </div>
+<h2>학생 맞춤형 AI 교육, 한국엑스퍼트교육원과 함께하세요</h2><p>교육 대상과 목적을 알려주시면 맞춤 교육 제안서를 보내드립니다.</p>  </div>
 
   <div class="contact">
-<div><div class="k">전화</div><div class="v">02-1234-5678</div></div><div><div class="k">이메일</div><div class="v">contact@example.com</div></div><div><div class="k">웹사이트</div><div class="v">https://www.example.com</div></div><div><div class="k">주소</div><div class="v">서울특별시 강남구 테헤란로 123, 10층</div></div>  </div>
-  <div class="page-footer"><span>샘플교육컴퍼니</span><span>회사소개서</span></div>
+<div><div class="k">대표</div><div class="v">박서현</div></div>  </div>
+  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 
 </body>

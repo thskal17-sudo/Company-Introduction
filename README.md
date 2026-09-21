@@ -35,11 +35,14 @@ python generate.py -d data/other.yaml -o dist -n brochure   # 다른 데이터 �
 | 항목 | 내용 | 비고 |
 |---|---|---|
 | `company` | 회사명, 슬로건, 설립일, 대표, 연락처, 로고, 브랜드 색상 | `name` 만 필수 |
+| `greeting` | 대표 인사말 (`text`, `signer`) | 회사 소개 페이지 상단에 강조 표시 |
 | `about` | 회사 소개 문단 (빈 줄로 문단 구분) | |
 | `mission`, `vision` | 미션 / 비전 한 줄 | |
-| `values` | 핵심 가치 목록 (`title`, `description`) | 2~4개 권장 |
+| `values` | 핵심 가치 목록 (`title`, `en`, `description`) | 3개면 3열, 그 외 2열 배치 |
+| `strategies` | 전략 방향 키워드 (`title`, `description`) | 원형 배지로 표시 |
 | `stats` | 주요 숫자 (`label`, `value`) | 3~4개 권장 |
 | `history` | 연혁 (`year`, `event`) | |
+| `programs_heading` | 프로그램 섹션 제목 (`title`, `en`, `subtitle`) | 비우면 '교육 프로그램' |
 | `programs` | 교육 프로그램 (`title`, `summary`, `target`, `duration`, `features`) | 3개 이상이면 차별화 포인트가 마지막 페이지로 이동 |
 | `strengths` | 차별화 포인트 (`title`, `description`) | |
 | `instructors` | 강사 (`name`, `title`, `photo`, `quote`, `bio`, `specialties`, `career`, `education`, `certifications`) | 한 페이지에 2명씩 배치 |

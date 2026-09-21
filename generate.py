@@ -73,6 +73,10 @@ def normalize(raw: dict, base: Path) -> dict:
     c["logo"] = image_data_uri(c.get("logo") or "", base)
     d["c"] = c
     d["about"] = paragraphs(d.get("about"))
+    greeting = dict(d.get("greeting") or {})
+    greeting["text"] = paragraphs(greeting.get("text"))
+    d["greeting"] = greeting
+    d["programs_heading"] = d.get("programs_heading") or {}
     instructors = []
     for i in d.get("instructors") or []:
         i = dict(i)
@@ -81,7 +85,7 @@ def normalize(raw: dict, base: Path) -> dict:
         i["bio"] = paragraphs(i.get("bio"))
         instructors.append(i)
     d["instructors"] = instructors
-    for key in ("values", "stats", "history", "programs", "strengths", "clients", "testimonials"):
+    for key in ("values", "strategies", "stats", "history", "programs", "strengths", "clients", "testimonials"):
         d[key] = d.get(key) or []
     d["closing"] = d.get("closing") or {}
     d["generated_on"] = dt.date.today().strftime("%Y. %m")
@@ -239,6 +243,13 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
 
     # ---- 회사 소개
     heading("회사 소개", 1)
+    if data["greeting"]["text"]:
+        heading("인사말", 2)
+        for para in data["greeting"]["text"]:
+            doc.add_paragraph(para)
+        if data["greeting"].get("signer"):
+            p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            p.add_run(data["greeting"]["signer"]).bold = True
     for para in data["about"]:
         doc.add_paragraph(para)
     if data["stats"]:
@@ -267,6 +278,15 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
             if v.get("description"):
                 doc.add_paragraph(v["description"])
 
+    # ---- 전략 방향
+    if data["strategies"]:
+        heading("전략 방향", 1)
+        for st in data["strategies"]:
+            p = doc.add_paragraph(style="List Bullet")
+            p.add_run(str(st.get("title", ""))).bold = True
+            if st.get("description"):
+                p.add_run(f" — {st['description']}")
+
     # ---- 연혁
     if data["history"]:
         heading("연혁", 1)
@@ -279,7 +299,10 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
     # ---- 프로그램
     if data["programs"]:
         doc.add_page_break()
-        heading("교육 프로그램", 1)
+        ph = data["programs_heading"]
+        heading(ph.get("title") or "교육 프로그램", 1)
+        if ph.get("subtitle"):
+            doc.add_paragraph(ph["subtitle"])
         for p_ in data["programs"]:
             heading(p_.get("title", ""), 2)
             if p_.get("summary"):

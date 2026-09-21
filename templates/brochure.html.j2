@@ -55,7 +55,7 @@
   .section-title {
     font-size: 20pt;
     color: var(--brand);
-    margin-bottom: 8mm;
+    margin-bottom: 7mm;
     padding-bottom: 3mm;
     border-bottom: 3px solid var(--brand);
     display: flex;
@@ -99,28 +99,41 @@
   .cover .cover-foot { display: flex; justify-content: space-between; font-size: 9.5pt; opacity: .9; }
 
   /* ---- Stats ---- */
-  .stats { display: grid; grid-template-columns: repeat({{ stats|length if stats else 4 }}, 1fr); gap: 4mm; margin: 8mm 0; }
-  .stat { background: var(--bg); border-radius: 8px; padding: 6mm 4mm; text-align: center; border-top: 4px solid var(--accent); }
+  .stats { display: grid; grid-template-columns: repeat({{ stats|length if stats else 4 }}, 1fr); gap: 4mm; margin: 6mm 0; }
+  .stat { background: var(--bg); border-radius: 8px; padding: 5mm 4mm; text-align: center; border-top: 4px solid var(--accent); }
   .stat .value { white-space: nowrap; font-size: 19pt; font-weight: 900; color: var(--brand); line-height: 1.1; }
   .stat .label { font-size: 9.5pt; color: var(--muted); margin-top: 2mm; }
 
   /* ---- Mission / vision ---- */
-  .mv { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 8mm; }
-  .mv .box { background: var(--brand); color: #fff; border-radius: 8px; padding: 6mm; }
+  .mv { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 2mm; }
+  .mv .box { background: var(--brand); color: #fff; border-radius: 8px; padding: 5mm 6mm; }
   .mv .box.alt { background: color-mix(in srgb, var(--brand) 12%, white); color: var(--ink); }
   .mv .kicker { font-size: 9pt; letter-spacing: .2em; opacity: .8; margin-bottom: 2mm; }
   .mv .text { font-size: 12.5pt; font-weight: 500; line-height: 1.5; }
 
+  /* ---- Greeting ---- */
+  .greeting { background: var(--bg); border-left: 5px solid var(--accent); border-radius: 0 8px 8px 0; padding: 5mm 7mm; margin-bottom: 6mm; }
+  .greeting .g-title { font-size: 9pt; letter-spacing: .2em; color: var(--muted); margin-bottom: 2mm; }
+  .greeting p { font-size: 10.5pt; }
+  .greeting .signer { text-align: right; font-weight: 700; margin-top: 3mm; color: var(--brand); }
+
+  /* ---- Strategies ---- */
+  .strategies { display: grid; grid-template-columns: repeat(auto-fit, minmax(30mm, 1fr)); gap: 4mm; margin-top: 2mm; }
+  .strategy { text-align: center; }
+  .strategy .circle { width: 30mm; height: 30mm; border-radius: 50%; margin: 0 auto 2mm; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10pt; line-height: 1.25; padding: 2mm; word-break: keep-all; text-align: center; }
+  .strategy:nth-child(even) .circle { background: var(--brand); }
+  .strategy p { font-size: 9pt; color: var(--muted); }
+
   /* ---- Values ---- */
-  .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5mm; }
-  .value { border: 1px solid var(--line); border-radius: 8px; padding: 5mm 6mm; }
+  .values { display: grid; grid-template-columns: repeat({{ 3 if values and values|length % 3 == 0 else 2 }}, 1fr); gap: 4mm; }
+  .value { border: 1px solid var(--line); border-radius: 8px; padding: 4mm 5mm; }
   .value .num { font-size: 9pt; color: var(--accent); font-weight: 700; letter-spacing: .1em; }
   .value h3 { font-size: 12.5pt; color: var(--brand); margin: 1mm 0 2mm; }
   .value p { font-size: 10pt; color: var(--muted); }
 
   /* ---- History ---- */
   .timeline { list-style: none; margin: 0; padding: 0 0 0 6mm; border-left: 2px solid var(--line); }
-  .timeline li { position: relative; padding: 0 0 6mm 8mm; }
+  .timeline li { position: relative; padding: 0 0 4mm 8mm; }
   .timeline li::before {
     content: ""; position: absolute; left: -7.5mm; top: 2.2mm; width: 11px; height: 11px; border-radius: 50%;
     background: var(--accent); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--accent);
@@ -172,7 +185,7 @@
   .closing { background: var(--brand); color: #fff; border-radius: 10px; padding: 8mm 10mm; text-align: center; margin-top: 7mm; }
   .closing h2 { font-size: 18pt; }
   .closing p { font-size: 11pt; opacity: .9; margin-top: 3mm; }
-  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 10mm; margin-top: 6mm; font-size: 10.5pt; }
+  .contact { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm 8mm; margin-top: 6mm; font-size: 10pt; }
   .contact .k { font-size: 9pt; color: var(--muted); letter-spacing: .05em; }
   .contact .v { font-weight: 500; }
 
@@ -187,6 +200,38 @@
 
 {# 프로그램이 많으면 차별화 포인트는 마지막 페이지로 보내 A4 한 장을 넘지 않게 합니다. #}
 {% set strengths_on_last_page = strengths and programs|length > 2 %}
+{# 핵심 가치가 없으면 연혁을 회사 소개 페이지에 붙여 빈 페이지가 생기지 않게 합니다. #}
+{% set history_on_about_page = history and not values and history|length <= 6 %}
+{% macro history_block(history, before) %}
+  <h2 class="section-title" {% if before %}style="margin-top:10mm"{% endif %}>연혁 <small>History</small></h2>
+  <ul class="timeline">
+    {% for h in history %}
+    <li><div class="year">{{ h.year }}</div><div class="event">{{ h.event }}</div></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+{# 통계·미션·비전이 없어 회사 소개 페이지가 비면 핵심 가치를 그 페이지에 함께 배치합니다. #}
+{% set values_on_about_page = values and not stats and not mission and not vision and not history_on_about_page and values|length <= 4 %}
+{% macro values_block(values, before) %}
+  <h2 class="section-title" {% if before %}style="margin-top:8mm"{% endif %}>핵심 가치 <small>Core Values</small></h2>
+  <div class="values">
+    {% for v in values %}
+    <div class="value">
+      <div class="num">{{ '%02d' % loop.index }}{% if v.en %} · {{ v.en }}{% endif %}</div>
+      <h3>{{ v.title }}</h3>
+      <p>{{ v.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+{% macro strategies_block(strategies) %}
+  <h2 class="section-title" style="margin-top:8mm">전략 방향 <small>Strategic Direction</small></h2>
+  <div class="strategies">
+    {% for st in strategies %}
+    <div class="strategy"><div class="circle">{{ st.title }}</div>{% if st.description %}<p>{{ st.description }}</p>{% endif %}</div>
+    {% endfor %}
+  </div>
+{% endmacro %}
 {% macro strengths_block(strengths, before) %}
   <h2 class="section-title" {% if before %}style="margin-top:10mm"{% endif %}>차별화 포인트 <small>Why Us</small></h2>
   <div class="strengths">
@@ -221,10 +266,21 @@
 {# ================= 회사 소개 ================= #}
 <section class="page">
   <h2 class="section-title">회사 소개 <small>About Us</small></h2>
+  {% if greeting and greeting.text %}
+  <div class="greeting">
+    <div class="g-title">GREETING</div>
+    {% for para in greeting.text %}<p>{{ para }}</p>{% endfor %}
+    {% if greeting.signer %}<div class="signer">{{ greeting.signer }}</div>{% endif %}
+  </div>
+  {% endif %}
   {% if about %}
   <div class="lead">
     {% for para in about %}<p>{{ para }}</p>{% endfor %}
   </div>
+  {% endif %}
+  {% if values_on_about_page %}
+  {{ values_block(values, true) }}
+  {% if strategies %}{{ strategies_block(strategies) }}{% endif %}
   {% endif %}
 
   {% if stats %}
@@ -242,40 +298,23 @@
   </div>
   {% endif %}
 
-  {% if c.founded or c.ceo or c.address %}
-  <div class="contact" style="margin-top:10mm">
-    {% if c.founded %}<div><div class="k">설립</div><div class="v">{{ c.founded }}</div></div>{% endif %}
-    {% if c.ceo %}<div><div class="k">대표</div><div class="v">{{ c.ceo }}</div></div>{% endif %}
-    {% if c.address %}<div><div class="k">주소</div><div class="v">{{ c.address }}</div></div>{% endif %}
-    {% if c.business_number %}<div><div class="k">사업자등록번호</div><div class="v">{{ c.business_number }}</div></div>{% endif %}
-  </div>
+  {% if history_on_about_page %}
+  {{ history_block(history, true) }}
   {% endif %}
+
   <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
 </section>
 
 {# ================= 핵심 가치 / 연혁 ================= #}
-{% if values or history %}
+{% if (values and not values_on_about_page) or (history and not history_on_about_page) %}
 <section class="page">
-  {% if values %}
-  <h2 class="section-title">핵심 가치 <small>Core Values</small></h2>
-  <div class="values">
-    {% for v in values %}
-    <div class="value">
-      <div class="num">{{ '%02d' % loop.index }}</div>
-      <h3>{{ v.title }}</h3>
-      <p>{{ v.description }}</p>
-    </div>
-    {% endfor %}
-  </div>
+  {% if values and not values_on_about_page %}
+  {{ values_block(values, false) }}
+  {% if strategies %}{{ strategies_block(strategies) }}{% endif %}
   {% endif %}
 
-  {% if history %}
-  <h2 class="section-title" style="margin-top:12mm">연혁 <small>History</small></h2>
-  <ul class="timeline">
-    {% for h in history %}
-    <li><div class="year">{{ h.year }}</div><div class="event">{{ h.event }}</div></li>
-    {% endfor %}
-  </ul>
+  {% if history and not history_on_about_page %}
+  {{ history_block(history, values) }}
   {% endif %}
   <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
 </section>
@@ -285,7 +324,8 @@
 {% if programs or strengths %}
 <section class="page">
   {% if programs %}
-  <h2 class="section-title">교육 프로그램 <small>Programs &amp; Services</small></h2>
+  <h2 class="section-title">{{ programs_heading.title if programs_heading and programs_heading.title else '교육 프로그램' }} <small>{{ programs_heading.en if programs_heading and programs_heading.en else 'Programs & Services' }}</small></h2>
+  {% if programs_heading and programs_heading.subtitle %}<p class="lead" style="margin-bottom:5mm">{{ programs_heading.subtitle }}</p>{% endif %}
   <div class="programs">
     {% for p in programs %}
     <div class="program">
@@ -365,6 +405,9 @@
   {% endif %}
 
   <div class="contact">
+    {% if c.founded %}<div><div class="k">설립</div><div class="v">{{ c.founded }}</div></div>{% endif %}
+    {% if c.ceo %}<div><div class="k">대표</div><div class="v">{{ c.ceo }}</div></div>{% endif %}
+    {% if c.business_number %}<div><div class="k">사업자등록번호</div><div class="v">{{ c.business_number }}</div></div>{% endif %}
     {% if c.phone %}<div><div class="k">전화</div><div class="v">{{ c.phone }}</div></div>{% endif %}
     {% if c.email %}<div><div class="k">이메일</div><div class="v">{{ c.email }}</div></div>{% endif %}
     {% if c.website %}<div><div class="k">웹사이트</div><div class="v">{{ c.website }}</div></div>{% endif %}
