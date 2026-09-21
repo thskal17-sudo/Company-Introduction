@@ -43,8 +43,10 @@ python generate.py -d data/other.yaml -o dist -n brochure   # 다른 데이터 �
 | `strategies` | 전략 방향 키워드 (`title`, `description`) | 원형 배지로 표시 |
 | `stats` | 주요 숫자 (`label`, `value`) | 3~4개 권장 |
 | `history` | 연혁 (`year`, `event`) | |
-| `programs_heading` | 프로그램 섹션 제목 (`title`, `en`, `subtitle`) | 비우면 '교육 프로그램' |
-| `programs` | 교육 프로그램 (`title`, `summary`, `target`, `duration`, `features`) | 3개 이상이면 차별화 포인트가 마지막 페이지로 이동 |
+| `comparison` | '무엇이 다른가' 비교 (`quote`, `before`, `after`, `goal`) | 기존 교육 vs 우리 교육 |
+| `program_axes`, `program_axes_note` | 교육 프로그램 축 (`title`, `text`) | 비교 페이지 하단에 표시 |
+| `programs_heading` | 프로그램 카드 페이지 제목 (`title`, `en`, `subtitle`) | 비우면 '교육 프로그램' |
+| `programs` | 교육 프로그램. `sections`(`title`, `subtitle`, `items`)가 있으면 한 페이지씩 상세 페이지, `features`만 있으면 카드로 모아 표시. `photos`에 사진 경로 | 문장 안의 `**강조**`는 포인트 색으로 표시 |
 | `strengths` | 차별화 포인트 (`title`, `description`) | |
 | `instructors` | 강사 (`name`, `title`, `photo`, `quote`, `bio`, `specialties`, `career`, `education`, `certifications`) | 한 페이지에 2명씩 배치 |
 | `clients` | 주요 고객사 이름 목록 | |

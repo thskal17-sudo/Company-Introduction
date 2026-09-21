@@ -86,8 +86,18 @@ def normalize(raw: dict, base: Path) -> dict:
         i["bio"] = paragraphs(i.get("bio"))
         instructors.append(i)
     d["instructors"] = instructors
-    for key in ("values", "strategies", "stats", "history", "programs", "strengths", "clients", "testimonials"):
+    for key in ("values", "strategies", "stats", "history", "programs", "strengths", "clients", "testimonials", "program_axes"):
         d[key] = d.get(key) or []
+    d["comparison"] = d.get("comparison") or {}
+    d["program_axes_note"] = d.get("program_axes_note") or ""
+    programs = []
+    for p in d["programs"]:
+        p = dict(p)
+        p["sections"] = p.get("sections") or []
+        p["photo_paths"] = p.get("photos") or []
+        p["photos"] = [u for u in (image_data_uri(ph, base) for ph in p["photo_paths"]) if u]
+        programs.append(p)
+    d["programs"] = programs
     d["closing"] = d.get("closing") or {}
     d["generated_on"] = dt.date.today().strftime("%Y. %m")
     return d
@@ -96,6 +106,17 @@ def normalize(raw: dict, base: Path) -> dict:
 # --------------------------------------------------------------------------- #
 # HTML
 # --------------------------------------------------------------------------- #
+def emph(text) -> "Markup":
+    """**강조** 표기를 <b>강조</b> 로 바꿉니다 (나머지 텍스트는 HTML 이스케이프)."""
+    import re
+    from markupsafe import Markup, escape
+    parts = re.split(r"\*\*(.+?)\*\*", str(text or ""))
+    out = []
+    for i, part in enumerate(parts):
+        out.append(f"<b>{escape(part)}</b>" if i % 2 else str(escape(part)))
+    return Markup("".join(out))
+
+
 def build_html(data: dict, out: Path) -> Path:
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATE_DIR)),
@@ -103,6 +124,7 @@ def build_html(data: dict, out: Path) -> Path:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    env.filters["emph"] = emph
     html = env.get_template("brochure.html.j2").render(**data)
     out.write_text(html, encoding="utf-8")
     return out
@@ -298,6 +320,42 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
             r[0].text, r[1].text = str(h.get("year", "")), str(h.get("event", ""))
             r[0].width, r[1].width = Cm(3), Cm(14)
 
+    def plain(text):
+        return str(text or "").replace("**", "")
+
+    # ---- 무엇이 다른가
+    cmp_ = data["comparison"]
+    if cmp_:
+        doc.add_page_break()
+        heading(cmp_.get("title") or f"{c['name']}, 무엇이 다른가?", 1)
+        if cmp_.get("quote"):
+            p = doc.add_paragraph(); r = p.add_run(f"“{plain(cmp_['quote'])}”"); r.bold = True; r.font.size = Pt(14); r.font.color.rgb = brand
+        if cmp_.get("before") or cmp_.get("after"):
+            t = doc.add_table(rows=1, cols=2); t.style = "Light Grid Accent 1"
+            t.rows[0].cells[0].text = cmp_.get("before_title") or "기존 교육의 한계"
+            t.rows[0].cells[1].text = cmp_.get("after_title") or c["name"]
+            n = max(len(cmp_.get("before") or []), len(cmp_.get("after") or []))
+            for i in range(n):
+                cells = t.add_row().cells
+                b = (cmp_.get("before") or [])[i:i+1]; a = (cmp_.get("after") or [])[i:i+1]
+                cells[0].text = f"✕ {b[0]}" if b else ""
+                cells[1].text = f"✔ {a[0]}" if a else ""
+        if cmp_.get("goal"):
+            p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.add_run("교육의 목표  ").font.color.rgb = RGBColor(0x88, 0x88, 0x88)
+            r = p.add_run(cmp_["goal"]); r.bold = True; r.font.size = Pt(13)
+
+    # ---- 교육 3축
+    if data["program_axes"]:
+        heading("교육 프로그램", 1)
+        for a in data["program_axes"]:
+            p = doc.add_paragraph(style="List Bullet")
+            p.add_run(f"{a.get('title', '')}  ").bold = True
+            p.add_run(plain(a.get("text")))
+        if data["program_axes_note"]:
+            p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.add_run(f"“{data['program_axes_note']}”").bold = True
+
     # ---- 프로그램
     if data["programs"]:
         doc.add_page_break()
@@ -307,10 +365,18 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
             doc.add_paragraph(ph["subtitle"])
         for p_ in data["programs"]:
             heading(p_.get("title", ""), 2)
+            kv_table([("활용 대상", p_.get("target")), ("시간", p_.get("duration"))])
             if p_.get("summary"):
-                doc.add_paragraph(p_["summary"])
-            kv_table([("대상", p_.get("target")), ("시간", p_.get("duration"))])
+                doc.add_paragraph(plain(p_["summary"]))
             bullets(p_.get("features"))
+            for i, sec in enumerate(p_.get("sections") or [], 1):
+                heading(f"{i}. {sec.get('title', '')}", 3)
+                if sec.get("subtitle"):
+                    doc.add_paragraph(sec["subtitle"])
+                bullets(sec.get("items"))
+            for photo in p_.get("photo_paths") or []:
+                if (base / photo).is_file():
+                    doc.add_picture(str(base / photo), width=Cm(7))
 
     # ---- 강점
     if data["strengths"]:

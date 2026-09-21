@@ -153,6 +153,43 @@
   .program ul { margin: 0; padding-left: 5mm; font-size: 10pt; }
   .program li { margin-bottom: 1mm; }
 
+  /* ---- Comparison (무엇이 다른가) ---- */
+  .cmp-quote { background: var(--brand); color: #fff; border-radius: 10px; padding: 9mm 10mm; font-size: 17pt; font-weight: 300; line-height: 1.5; position: relative; margin-bottom: 7mm; }
+  .cmp-quote b { font-weight: 700; color: var(--accent); }
+  .cmp-quote::before { content: "“"; position: absolute; top: -8mm; left: 6mm; font-size: 40pt; color: var(--accent); font-weight: 900; line-height: 1; }
+  .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .cmp-col h4 { font-size: 11.5pt; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 2px solid var(--line); }
+  .cmp-col.after h4 { border-color: var(--accent); color: var(--brand); }
+  .cmp-col ul { list-style: none; margin: 0; padding: 0; }
+  .cmp-col li { font-size: 10.5pt; padding: 1.2mm 0 1.2mm 7mm; position: relative; color: var(--muted); }
+  .cmp-col li::before { content: "✕"; position: absolute; left: 0; color: #b6bcc5; font-weight: 700; }
+  .cmp-col.after li { color: var(--ink); font-weight: 500; }
+  .cmp-col.after li::before { content: "✔"; color: var(--accent); }
+  .cmp-goal { margin-top: 7mm; background: var(--bg); border-radius: 8px; padding: 5mm; text-align: center; }
+  .cmp-goal .k { font-size: 9pt; letter-spacing: .2em; color: var(--muted); }
+  .cmp-goal .v { font-size: 14pt; font-weight: 700; margin-top: 1mm; }
+
+  /* ---- Program axes (교육 3축) ---- */
+  .axes { display: grid; gap: 4mm; }
+  .axis { display: grid; grid-template-columns: 30mm 1fr; align-items: center; }
+  .axis .lbl { height: 16mm; border-radius: 8mm 0 0 8mm; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10.5pt; padding: 0 3mm; text-align: center; }
+  .axis .txt { height: 16mm; border-radius: 0 8mm 8mm 0; background: var(--bg); display: flex; align-items: center; padding: 0 7mm; font-size: 11.5pt; }
+  .axis .txt b { color: var(--accent); }
+  .axes-note { text-align: center; font-size: 12.5pt; font-weight: 700; margin-top: 6mm; color: var(--brand); }
+
+  /* ---- Program detail page ---- */
+  .pd-target { display: inline-block; font-size: 9.5pt; color: var(--brand); background: color-mix(in srgb, var(--accent) 15%, white); border-left: 3px solid var(--accent); padding: 1.5mm 4mm; margin: -3mm 0 6mm; }
+  .pd-intro { font-size: 13pt; font-weight: 500; line-height: 1.6; margin-bottom: 7mm; }
+  .pd-intro b { color: var(--accent); }
+  .pd-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(60mm, 1fr)); gap: 5mm 8mm; }
+  .pd-section h4 { font-size: 11.5pt; color: var(--brand); margin-bottom: 2mm; }
+  .pd-section h4 .n { color: var(--accent); margin-right: 1.5mm; }
+  .pd-section ul { margin: 0; padding-left: 4.5mm; font-size: 10.5pt; }
+  .pd-section li { margin-bottom: 1.2mm; }
+  .pd-section .sub { font-size: 9.5pt; color: var(--muted); margin-bottom: 1.5mm; }
+  .pd-photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(50mm, 1fr)); gap: 3mm; margin-top: 7mm; }
+  .pd-photos img { width: 100%; height: 42mm; object-fit: cover; border-radius: 6px; display: block; }
+
   /* ---- Strengths ---- */
   .strengths { display: grid; gap: 4mm; margin-top: 6mm; }
   .strength { display: grid; grid-template-columns: 12mm 1fr; gap: 4mm; align-items: start; }
@@ -201,7 +238,9 @@
 <body>
 
 {# 프로그램이 많으면 차별화 포인트는 마지막 페이지로 보내 A4 한 장을 넘지 않게 합니다. #}
-{% set strengths_on_last_page = strengths and programs|length > 2 %}
+{% set simple_programs = programs|rejectattr("sections")|list %}
+{% set detail_programs = programs|selectattr("sections")|list %}
+{% set strengths_on_last_page = strengths and simple_programs|length > 2 %}
 {# 핵심 가치가 없으면 연혁을 회사 소개 페이지에 붙여 빈 페이지가 생기지 않게 합니다. #}
 {% set history_on_about_page = history and not values and history|length <= 6 %}
 {% macro history_block(history, before) %}
@@ -322,14 +361,64 @@
 </section>
 {% endif %}
 
-{# ================= 프로그램 / 강점 ================= #}
-{% if programs or strengths %}
+{# ================= 무엇이 다른가 / 교육 3축 ================= #}
+{% if comparison or program_axes %}
 <section class="page">
-  {% if programs %}
+  {% if comparison %}
+  <h2 class="section-title">{{ comparison.title or c.name ~ ', 무엇이 다른가?' }} <small>Why Different</small></h2>
+  {% if comparison.quote %}<div class="cmp-quote">{{ comparison.quote|emph }}</div>{% endif %}
+  {% if comparison.before or comparison.after %}
+  <div class="cmp-cols">
+    <div class="cmp-col"><h4>{{ comparison.before_title or '기존 교육의 한계' }}</h4><ul>{% for x in comparison.before %}<li>{{ x }}</li>{% endfor %}</ul></div>
+    <div class="cmp-col after"><h4>{{ comparison.after_title or c.name }}</h4><ul>{% for x in comparison.after %}<li>{{ x }}</li>{% endfor %}</ul></div>
+  </div>
+  {% endif %}
+  {% if comparison.goal %}<div class="cmp-goal"><div class="k">교육의 목표</div><div class="v">{{ comparison.goal }}</div></div>{% endif %}
+  {% endif %}
+
+  {% if program_axes %}
+  <h2 class="section-title" {% if comparison %}style="margin-top:10mm"{% endif %}>교육 프로그램 <small>Programs</small></h2>
+  <div class="axes">
+    {% for a in program_axes %}
+    <div class="axis"><div class="lbl">{{ a.title }}</div><div class="txt">{{ a.text|emph }}</div></div>
+    {% endfor %}
+  </div>
+  {% if program_axes_note %}<div class="axes-note">“ {{ program_axes_note }} ”</div>{% endif %}
+  {% endif %}
+  <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
+</section>
+{% endif %}
+
+{# ================= 프로그램 상세 (sections 가 있는 프로그램은 한 페이지씩) ================= #}
+{% for p in detail_programs %}
+<section class="page">
+  <h2 class="section-title">{{ p.title }} {% if p.en %}<small>{{ p.en }}</small>{% endif %}</h2>
+  {% if p.target %}<div class="pd-target">활용 대상 &nbsp;|&nbsp; {{ p.target }}</div>{% endif %}
+  {% if p.summary %}<div class="pd-intro">{{ p.summary|emph }}</div>{% endif %}
+  <div class="pd-sections">
+    {% for sec in p.sections %}
+    <div class="pd-section">
+      <h4><span class="n">{{ loop.index }}.</span>{{ sec.title }}</h4>
+      {% if sec.subtitle %}<div class="sub">{{ sec.subtitle }}</div>{% endif %}
+      <ul>{% for it in sec['items'] %}<li>{{ it }}</li>{% endfor %}</ul>
+    </div>
+    {% endfor %}
+  </div>
+  {% if p.photos %}
+  <div class="pd-photos">{% for ph in p.photos %}<img src="{{ ph }}" alt="{{ p.title }} 사진">{% endfor %}</div>
+  {% endif %}
+  <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
+</section>
+{% endfor %}
+
+{# ================= 프로그램 카드 / 강점 ================= #}
+{% if simple_programs or strengths %}
+<section class="page">
+  {% if simple_programs %}
   <h2 class="section-title">{{ programs_heading.title if programs_heading and programs_heading.title else '교육 프로그램' }} <small>{{ programs_heading.en if programs_heading and programs_heading.en else 'Programs & Services' }}</small></h2>
   {% if programs_heading and programs_heading.subtitle %}<p class="lead" style="margin-bottom:5mm">{{ programs_heading.subtitle }}</p>{% endif %}
   <div class="programs">
-    {% for p in programs %}
+    {% for p in simple_programs %}
     <div class="program">
       <h3>{{ p.title }}</h3>
       {% if p.summary %}<div class="summary">{{ p.summary }}</div>{% endif %}
@@ -344,7 +433,7 @@
   {% endif %}
 
   {% if strengths and not strengths_on_last_page %}
-  {{ strengths_block(strengths, programs) }}
+  {{ strengths_block(strengths, simple_programs) }}
   {% endif %}
   <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
 </section>

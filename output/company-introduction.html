@@ -153,6 +153,43 @@
   .program ul { margin: 0; padding-left: 5mm; font-size: 10pt; }
   .program li { margin-bottom: 1mm; }
 
+  /* ---- Comparison (무엇이 다른가) ---- */
+  .cmp-quote { background: var(--brand); color: #fff; border-radius: 10px; padding: 9mm 10mm; font-size: 17pt; font-weight: 300; line-height: 1.5; position: relative; margin-bottom: 7mm; }
+  .cmp-quote b { font-weight: 700; color: var(--accent); }
+  .cmp-quote::before { content: "“"; position: absolute; top: -8mm; left: 6mm; font-size: 40pt; color: var(--accent); font-weight: 900; line-height: 1; }
+  .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .cmp-col h4 { font-size: 11.5pt; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 2px solid var(--line); }
+  .cmp-col.after h4 { border-color: var(--accent); color: var(--brand); }
+  .cmp-col ul { list-style: none; margin: 0; padding: 0; }
+  .cmp-col li { font-size: 10.5pt; padding: 1.2mm 0 1.2mm 7mm; position: relative; color: var(--muted); }
+  .cmp-col li::before { content: "✕"; position: absolute; left: 0; color: #b6bcc5; font-weight: 700; }
+  .cmp-col.after li { color: var(--ink); font-weight: 500; }
+  .cmp-col.after li::before { content: "✔"; color: var(--accent); }
+  .cmp-goal { margin-top: 7mm; background: var(--bg); border-radius: 8px; padding: 5mm; text-align: center; }
+  .cmp-goal .k { font-size: 9pt; letter-spacing: .2em; color: var(--muted); }
+  .cmp-goal .v { font-size: 14pt; font-weight: 700; margin-top: 1mm; }
+
+  /* ---- Program axes (교육 3축) ---- */
+  .axes { display: grid; gap: 4mm; }
+  .axis { display: grid; grid-template-columns: 30mm 1fr; align-items: center; }
+  .axis .lbl { height: 16mm; border-radius: 8mm 0 0 8mm; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10.5pt; padding: 0 3mm; text-align: center; }
+  .axis .txt { height: 16mm; border-radius: 0 8mm 8mm 0; background: var(--bg); display: flex; align-items: center; padding: 0 7mm; font-size: 11.5pt; }
+  .axis .txt b { color: var(--accent); }
+  .axes-note { text-align: center; font-size: 12.5pt; font-weight: 700; margin-top: 6mm; color: var(--brand); }
+
+  /* ---- Program detail page ---- */
+  .pd-target { display: inline-block; font-size: 9.5pt; color: var(--brand); background: color-mix(in srgb, var(--accent) 15%, white); border-left: 3px solid var(--accent); padding: 1.5mm 4mm; margin: -3mm 0 6mm; }
+  .pd-intro { font-size: 13pt; font-weight: 500; line-height: 1.6; margin-bottom: 7mm; }
+  .pd-intro b { color: var(--accent); }
+  .pd-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(60mm, 1fr)); gap: 5mm 8mm; }
+  .pd-section h4 { font-size: 11.5pt; color: var(--brand); margin-bottom: 2mm; }
+  .pd-section h4 .n { color: var(--accent); margin-right: 1.5mm; }
+  .pd-section ul { margin: 0; padding-left: 4.5mm; font-size: 10.5pt; }
+  .pd-section li { margin-bottom: 1.2mm; }
+  .pd-section .sub { font-size: 9.5pt; color: var(--muted); margin-bottom: 1.5mm; }
+  .pd-photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(50mm, 1fr)); gap: 3mm; margin-top: 7mm; }
+  .pd-photos img { width: 100%; height: 42mm; object-fit: cover; border-radius: 6px; display: block; }
+
   /* ---- Strengths ---- */
   .strengths { display: grid; gap: 4mm; margin-top: 6mm; }
   .strength { display: grid; grid-template-columns: 12mm 1fr; gap: 4mm; align-items: start; }
@@ -255,27 +292,72 @@
 
 
 <section class="page">
-  <h2 class="section-title">AI 투어 메이커 프로그램 <small>AI Tour Maker Programs</small></h2>
-<p class="lead" style="margin-bottom:5mm">기초부터 실전 취업까지, 관광고등학교 맞춤형 3단계 성장 로드맵</p>  <div class="programs">
-    <div class="program">
-      <h3>[1학년] AI 워밍업 (Explore)</h3>
-<div class="summary">생성형 AI와 친해지고 나의 관광 진로를 탐색하는 단계</div>      <div class="meta">
-<span>대상 <b>관광고등학교 1학년</b></span>      </div>
-<ul><li>M1. AI 첫 만남 &amp; 프롬프트 놀이 — 생성형 AI 활용 미니 게임과 &#39;말로 그림 그리기&#39; 학습</li><li>M2. 나의 관광 직업 지도 — AI 커리어 코치와 적성·흥미 대화 기반 직업 추천</li></ul>    </div>
-    <div class="program">
-      <h3>[2학년] AI 실무 장착 (Apply)</h3>
-<div class="summary">AI로 실제 관광 상품과 홍보물을 기획·제작하는 단계</div>      <div class="meta">
-<span>대상 <b>관광고등학교 2학년</b></span>      </div>
-<ul><li>M1. 여행 상품 기획 — &#39;퍼스널 트래블 디자이너&#39; 맞춤형 일정 설계 → 맞춤 여행상품 기획서</li><li>M2. 프리미엄 여행 포토 — AI 사진 편집·마케팅 이미지 제작 → 시그니처 홍보물</li></ul>    </div>
-    <div class="program">
-      <h3>[3학년] AI 취업 출격</h3>
-<div class="summary">취업 서류와 면접을 AI로 준비하는 실전 단계</div>      <div class="meta">
-<span>대상 <b>관광고등학교 3학년</b></span>      </div>
-<ul><li>M1. AI 자기소개서·면접 코칭 — 취업 맞춤형 경력 작성과 모의 면접</li></ul>    </div>
+  <h2 class="section-title">한국엑스퍼트교육원, 무엇이 다른가? <small>Why Different</small></h2>
+<div class="cmp-quote"><b>엑스퍼트교육원</b>을 찾는 이유가 궁금하신가요?</div>  <div class="cmp-cols">
+    <div class="cmp-col"><h4>기존 교육의 한계</h4><ul><li>듣고 끝나는 강의</li><li>설명 위주의 수업</li><li>현실과 다른 진로 정보</li></ul></div>
+    <div class="cmp-col after"><h4>한국엑스퍼트교육원</h4><ul><li>실습 중심</li><li>참여형 수업</li><li>결과물이 남는 교육</li></ul></div>
   </div>
+<div class="cmp-goal"><div class="k">교육의 목표</div><div class="v">스스로 &#39;해봤다&#39;고 말할 수 있도록</div></div>
+  <h2 class="section-title" style="margin-top:10mm">교육 프로그램 <small>Programs</small></h2>
+  <div class="axes">
+    <div class="axis"><div class="lbl">AI 교육</div><div class="txt">AI를 &#39;아는 것&#39;에서 <b>&#39;활용하는 능력&#39;</b>으로</div></div>
+    <div class="axis"><div class="lbl">취업·진로</div><div class="txt">막연한 고민을 <b>&#39;계획&#39;</b>으로</div></div>
+    <div class="axis"><div class="lbl">직업체험</div><div class="txt">보는 체험이 아닌, <b>해보는 경험</b></div></div>
+  </div>
+<div class="axes-note">“ 교육은 3개 축으로 구성됩니다. ”</div>  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
+</section>
 
+<section class="page">
+  <h2 class="section-title">AI 투어 메이커 프로그램 <small>AI Tour Maker Programs</small></h2>
+<div class="pd-target">활용 대상 &nbsp;|&nbsp; 관광고등학교 1~3학년</div><div class="pd-intro">기초부터 실전 취업까지, 관광고등학교 맞춤형 <b>3단계 성장 로드맵</b></div>  <div class="pd-sections">
+    <div class="pd-section">
+      <h4><span class="n">1.</span>[1학년] AI 워밍업 (Explore)</h4>
+<div class="sub">생성형 AI와 친해지고 나의 관광 진로를 탐색하는 단계</div>      <ul><li>M1. AI 첫 만남 &amp; 프롬프트 놀이 — 생성형 AI 활용 미니 게임과 &#39;말로 그림 그리기&#39; 학습</li><li>M2. 나의 관광 직업 지도 — AI 커리어 코치와 적성·흥미 대화 기반 직업 추천</li></ul>
+    </div>
+    <div class="pd-section">
+      <h4><span class="n">2.</span>[2학년] AI 실무 장착 (Apply)</h4>
+<div class="sub">AI로 실제 관광 상품과 홍보물을 기획·제작하는 단계</div>      <ul><li>M1. 여행 상품 기획 — &#39;퍼스널 트래블 디자이너&#39; 맞춤형 일정 설계 → 맞춤 여행상품 기획서</li><li>M2. 프리미엄 여행 포토 — AI 사진 편집·마케팅 이미지 제작 → 시그니처 홍보물</li></ul>
+    </div>
+    <div class="pd-section">
+      <h4><span class="n">3.</span>[3학년] AI 취업 출격</h4>
+<div class="sub">취업 서류와 면접을 AI로 준비하는 실전 단계</div>      <ul><li>M1. AI 자기소개서·면접 코칭 — 취업 맞춤형 경력 작성과 모의 면접</li></ul>
+    </div>
+  </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
+<section class="page">
+  <h2 class="section-title">취업·진로 교육 프로그램 <small>Career Program</small></h2>
+<div class="pd-target">활용 대상 &nbsp;|&nbsp; 고등·대학생 / 취업 준비생 / 직무 역량 강화 과정</div><div class="pd-intro"><b>&#39;무엇을 해야 할지 모른다&#39;</b>는 고민을 실행 가능한 진로 로드맵으로 바꿉니다.</div>  <div class="pd-sections">
+    <div class="pd-section">
+      <h4><span class="n">1.</span>주요 교육 내용</h4>
+      <ul><li>AI 활용 취업 준비</li><li>인사 담당자를 사로잡는 자기소개·면접 기초</li><li>직무 이해 및 기업 분석</li><li>나의 강점·적성 탐색</li></ul>
+    </div>
+    <div class="pd-section">
+      <h4><span class="n">2.</span>기대 효과</h4>
+      <ul><li>진로 방향 명확화</li><li>자기 이해도 향상</li><li>취업 준비 동기 강화</li></ul>
+    </div>
+  </div>
+  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
+</section>
+<section class="page">
+  <h2 class="section-title">직업체험 <small>Job Experience</small></h2>
+<div class="pd-target">활용 대상 &nbsp;|&nbsp; 중·고등학생</div><div class="pd-intro">직업체험은 보는 체험이 아닌, <b>해보는 경험</b>이어야 합니다. 직업은 설명만으로는 이해할 수 없습니다.</div>  <div class="pd-sections">
+    <div class="pd-section">
+      <h4><span class="n">1.</span>주요 직업체험 분야</h4>
+      <ul><li>서비스·항공·호텔</li><li>미래 직업·신산업</li><li>학생 맞춤 직무 체험</li></ul>
+    </div>
+    <div class="pd-section">
+      <h4><span class="n">2.</span>직업체험 방식</h4>
+      <ul><li>역할·상황 기반 미션 수행</li><li>팀 활동 중심 체험</li></ul>
+    </div>
+    <div class="pd-section">
+      <h4><span class="n">3.</span>체험 효과</h4>
+      <ul><li>직업에 대한 현실적 이해</li><li>진로 선택 후회 감소</li><li>적극적인 참여와 몰입</li></ul>
+    </div>
+  </div>
+  <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
+</section>
+
 
 <section class="page">
   <h2 class="section-title">강사 소개 <small>Our Instructors</small></h2>
