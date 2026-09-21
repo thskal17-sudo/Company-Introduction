@@ -23,6 +23,8 @@
     color: var(--ink);
     background: #d9dee5;
     line-height: 1.6;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -79,7 +81,7 @@
     padding: 24mm 20mm;
   }
   .cover .logo-box { height: 26mm; display: flex; align-items: center; }
-  .cover .logo-box img { max-height: 26mm; max-width: 70mm; }
+  .cover .logo-box img { max-height: 26mm; max-width: 95mm; }
   .cover .logo-text { font-size: 16pt; font-weight: 900; letter-spacing: .04em; }
   .cover .cover-body { margin-top: auto; margin-bottom: auto; }
   .cover .doc-kind {
@@ -247,7 +249,7 @@
 {# ================= 표지 ================= #}
 <section class="page cover">
   <div class="logo-box">
-    {% if c.logo %}<img src="{{ c.logo }}" alt="{{ c.name }} 로고">{% else %}<span class="logo-text">{{ c.name }}</span>{% endif %}
+    {% if c.logo_white or c.logo %}<img src="{{ c.logo_white or c.logo }}" alt="{{ c.name }} 로고">{% else %}<span class="logo-text">{{ c.name }}</span>{% endif %}
   </div>
   <div class="cover-body">
     <span class="doc-kind">회사소개서</span>
@@ -404,6 +406,7 @@
   </div>
   {% endif %}
 
+  {% if c.logo %}<img src="{{ c.logo }}" alt="{{ c.name }} 로고" style="max-height:16mm;max-width:70mm;margin-top:8mm;display:block">{% endif %}
   <div class="contact">
     {% if c.founded %}<div><div class="k">설립</div><div class="v">{{ c.founded }}</div></div>{% endif %}
     {% if c.ceo %}<div><div class="k">대표</div><div class="v">{{ c.ceo }}</div></div>{% endif %}

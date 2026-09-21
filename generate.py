@@ -71,6 +71,7 @@ def normalize(raw: dict, base: Path) -> dict:
     c = dict(d.get("company") or {})
     c["logo_path"] = c.get("logo") or ""
     c["logo"] = image_data_uri(c.get("logo") or "", base)
+    c["logo_white"] = image_data_uri(c.get("logo_white") or "", base)
     d["c"] = c
     d["about"] = paragraphs(d.get("about"))
     greeting = dict(d.get("greeting") or {})
@@ -219,7 +220,8 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
 
     # ---- 표지
     if c.get("logo_path") and (base / c["logo_path"]).is_file():
-        doc.add_picture(str(base / c["logo_path"]), width=Cm(5))
+        doc.add_picture(str(base / c["logo_path"]), width=Cm(8))
+        doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
     for _ in range(6):
         doc.add_paragraph()
     p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER

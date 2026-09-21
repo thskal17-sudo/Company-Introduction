@@ -35,6 +35,7 @@ python generate.py -d data/other.yaml -o dist -n brochure   # 다른 데이터 �
 | 항목 | 내용 | 비고 |
 |---|---|---|
 | `company` | 회사명, 슬로건, 설립일, 대표, 연락처, 로고, 브랜드 색상 | `name` 만 필수 |
+| `company.logo` / `company.logo_white` | 흰 배경용 로고 / 어두운 표지용 흰색 로고 | 배경이 투명한 PNG 권장 |
 | `greeting` | 대표 인사말 (`text`, `signer`) | 회사 소개 페이지 상단에 강조 표시 |
 | `about` | 회사 소개 문단 (빈 줄로 문단 구분) | |
 | `mission`, `vision` | 미션 / 비전 한 줄 | |
