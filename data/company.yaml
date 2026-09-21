@@ -15,8 +15,8 @@ company:
   founded: ""                       # 예) 2018년 3월
   ceo: "박서현"                      # [확인 필요] 기존 소개서 인사말 서명
   logo: ""                          # 예) assets/logo.png  (비워 두면 회사명 텍스트로 대체)
-  brand_color: "#1F4E79"            # 소개서 전체 포인트 색상
-  accent_color: "#F2A900"           # 보조 색상
+  brand_color: "#1E1E1E"            # 소개서 전체 포인트 색상
+  accent_color: "#F4820F"           # 보조 색상
   address: ""
   phone: ""
   email: ""
