@@ -154,7 +154,6 @@ programs:
       - "assets/programs/career-1.jpg"
       - "assets/programs/career-2.jpg"
       - "assets/programs/career-3.jpg"
-      - "assets/programs/career-4.jpg"
 
   - title: "직업체험"
     en: "Job Experience"
