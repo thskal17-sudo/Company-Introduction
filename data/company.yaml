@@ -172,24 +172,21 @@ programs:
 # 차별화 포인트 (없으면 비워 두세요)
 strengths: []
 
-# 강사 소개  [샘플 — 실제 강사 정보로 교체 필요]
-instructors:
-  - name: "홍길동"
-    title: "대표 강사"
-    photo: ""                       # 예) assets/instructors/hong.jpg (비우면 이니셜 아바타)
-    quote: "교육은 사람을 바꾸고, 사람은 조직을 바꿉니다."
-    bio: |
-      (샘플) 15년간 교육 분야에서 강의해 왔습니다. 연간 100회 이상의 강의를 진행하고 있습니다.
-    specialties:
-      - "생성형 AI 활용"
-      - "진로·취업 코칭"
-    career:
-      - "現 한국엑스퍼트교육원 대표 강사"
-      - "前 ○○ 교육 담당"
-    education:
-      - "○○대학교 ○○학과"
-    certifications:
-      - "○○ 자격"
+# 강사 소개
+#  - 강사 정보를 받는 대로 아래 형식으로 채워 주세요. 한 페이지에 2명씩 배치됩니다.
+#  - 작성 양식은 data/작성양식.md 를 참고하세요.
+#  - 예시:
+#  - name: "김강사"
+#    title: "대표 강사"
+#    photo: "assets/instructors/kim.jpg"   # 세로 사진 권장 (없으면 이름 첫 글자 아바타)
+#    quote: "한 줄 소개 문구"
+#    bio: |
+#      강사 소개 문단입니다.
+#    specialties: ["생성형 AI 활용", "진로·취업 코칭"]
+#    career: ["現 한국엑스퍼트교육원 대표 강사", "前 ○○ 교육 담당"]
+#    education: ["○○대학교 ○○학과"]
+#    certifications: ["○○ 자격"]
+instructors: []
 
 # 주요 고객사 / 파트너 (없으면 비워 두세요)
 clients: []

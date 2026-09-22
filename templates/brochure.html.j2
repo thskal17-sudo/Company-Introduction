@@ -220,7 +220,22 @@
   .testimonial .q { font-size: 10.5pt; }
   .testimonial .a { font-size: 9.5pt; color: var(--muted); margin-top: 2mm; }
 
+  /* ---- Back cover (고객사·후기가 없을 때의 마지막 페이지) ---- */
+  .page.backcover { background: linear-gradient(160deg, var(--brand) 0%, color-mix(in srgb, var(--brand) 70%, black) 100%); color: #fff; justify-content: center; align-items: center; text-align: center; }
+  .backcover img.bc-logo { max-height: 30mm; max-width: 100mm; margin-bottom: 10mm; }
+  .backcover .bc-name { font-size: 15pt; font-weight: 700; letter-spacing: .02em; }
+  .backcover h2 { font-size: 22pt; font-weight: 700; margin-top: 12mm; max-width: 150mm; }
+  .backcover .bc-msg { font-size: 11.5pt; opacity: .85; margin-top: 4mm; max-width: 140mm; }
+  .backcover .accent-bar { width: 22mm; height: 5px; background: var(--accent); margin: 9mm auto; }
+  .backcover .bc-contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(45mm, max-content)); gap: 4mm 10mm; justify-content: center; font-size: 10.5pt; margin-top: 2mm; }
+  .backcover .bc-contact .k { font-size: 8.5pt; opacity: .65; letter-spacing: .05em; }
+  .backcover .bc-contact .v { font-weight: 500; }
+  .backcover .page-footer { position: absolute; left: 18mm; right: 18mm; bottom: 16mm; border-top-color: rgba(255,255,255,.25); color: rgba(255,255,255,.7); }
+
   /* ---- Closing ---- */
+  .closing-block { margin-top: auto; padding-top: 10mm; }
+  .closing-block + .page-footer { margin-top: 8mm; }
+  .closing-logo { max-height: 16mm; max-width: 70mm; margin-top: 8mm; display: block; }
   .closing { background: var(--brand); color: #fff; border-radius: 10px; padding: 8mm 10mm; text-align: center; margin-top: 7mm; }
   .closing h2 { font-size: 18pt; }
   .closing p { font-size: 11pt; opacity: .9; margin-top: 3mm; }
@@ -471,6 +486,25 @@
 {% endif %}
 
 {# ================= 고객사 / 후기 / 마무리 ================= #}
+{% set back_cover = not clients and not testimonials and not strengths_on_last_page %}
+{% if back_cover %}
+<section class="page backcover">
+  {% if c.logo_white or c.logo %}<img class="bc-logo" src="{{ c.logo_white or c.logo }}" alt="{{ c.name }} 로고">{% else %}<div class="bc-name">{{ c.name }}</div>{% endif %}
+  {% if closing and closing.headline %}<h2>{{ closing.headline }}</h2>{% endif %}
+  {% if closing and closing.message %}<div class="bc-msg">{{ closing.message }}</div>{% endif %}
+  <div class="accent-bar"></div>
+  <div class="bc-contact">
+    {% if c.ceo %}<div><div class="k">대표</div><div class="v">{{ c.ceo }}</div></div>{% endif %}
+    {% if c.founded %}<div><div class="k">설립</div><div class="v">{{ c.founded }}</div></div>{% endif %}
+    {% if c.phone %}<div><div class="k">전화</div><div class="v">{{ c.phone }}</div></div>{% endif %}
+    {% if c.email %}<div><div class="k">이메일</div><div class="v">{{ c.email }}</div></div>{% endif %}
+    {% if c.website %}<div><div class="k">웹사이트</div><div class="v">{{ c.website }}</div></div>{% endif %}
+    {% if c.address %}<div><div class="k">주소</div><div class="v">{{ c.address }}</div></div>{% endif %}
+    {% if c.business_number %}<div><div class="k">사업자등록번호</div><div class="v">{{ c.business_number }}</div></div>{% endif %}
+  </div>
+  <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
+</section>
+{% else %}
 <section class="page">
   {% if strengths_on_last_page %}
   {{ strengths_block(strengths, false) }}
@@ -488,6 +522,7 @@
   </div>
   {% endif %}
 
+  <div class="closing-block">
   {% if closing %}
   <div class="closing">
     {% if closing.headline %}<h2>{{ closing.headline }}</h2>{% endif %}
@@ -495,7 +530,7 @@
   </div>
   {% endif %}
 
-  {% if c.logo %}<img src="{{ c.logo }}" alt="{{ c.name }} 로고" style="max-height:16mm;max-width:70mm;margin-top:8mm;display:block">{% endif %}
+  {% if c.logo %}<img class="closing-logo" src="{{ c.logo }}" alt="{{ c.name }} 로고">{% endif %}
   <div class="contact">
     {% if c.founded %}<div><div class="k">설립</div><div class="v">{{ c.founded }}</div></div>{% endif %}
     {% if c.ceo %}<div><div class="k">대표</div><div class="v">{{ c.ceo }}</div></div>{% endif %}
@@ -505,8 +540,10 @@
     {% if c.website %}<div><div class="k">웹사이트</div><div class="v">{{ c.website }}</div></div>{% endif %}
     {% if c.address %}<div><div class="k">주소</div><div class="v">{{ c.address }}</div></div>{% endif %}
   </div>
+  </div>
   <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
 </section>
+{% endif %}
 
 </body>
 </html>

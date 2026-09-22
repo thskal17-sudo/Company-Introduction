@@ -15,6 +15,11 @@ data/company.yaml  ──▶  python generate.py --all  ──▶  output/compan
 3. 로고나 강사 사진은 `assets/` 폴더에 올린 뒤 YAML 에 경로만 적어 주세요.
    예) `logo: "assets/logo.png"`, `photo: "assets/instructors/hong.jpg"`
 
+## 1-1. 내용을 채워 넣을 때
+
+`data/작성양식.md` 에 채워야 할 항목이 표로 정리되어 있습니다.
+연락처, 강사 정보, 사진 목록을 이 양식에 맞춰 준비하면 그대로 `data/company.yaml` 에 옮겨 넣을 수 있습니다.
+
 ## 2. 내 컴퓨터에서 직접 생성
 
 ```bash
@@ -51,7 +56,7 @@ python generate.py -d data/other.yaml -o dist -n brochure   # 다른 데이터 �
 | `instructors` | 강사 (`name`, `title`, `photo`, `quote`, `bio`, `specialties`, `career`, `education`, `certifications`) | 한 페이지에 2명씩 배치 |
 | `clients` | 주요 고객사 이름 목록 | |
 | `testimonials` | 후기 (`quote`, `author`) | |
-| `closing` | 마무리 문구 (`headline`, `message`) | |
+| `closing` | 마무리 문구 (`headline`, `message`) | 고객사·후기가 없으면 마지막 페이지가 뒷표지 형태로 생성 |
 
 비어 있거나 지운 항목은 소개서에서 자동으로 빠집니다.
 
