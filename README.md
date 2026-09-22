@@ -60,6 +60,12 @@ python generate.py -d data/other.yaml -o dist -n brochure   # 다른 데이터 �
 
 비어 있거나 지운 항목은 소개서에서 자동으로 빠집니다.
 
+## 3-1. 사진 넣기
+
+`assets/README.md` 에 파일명과 들어가는 위치가 정리되어 있습니다.
+데이터에 경로만 적어 두고 파일이 아직 없으면, 소개서에 점선으로 된 **사진 자리**가 표시됩니다.
+파일을 넣고 다시 생성하면 그 자리에 사진이 들어갑니다.
+
 ## 4. 디자인 바꾸기
 
 - 색상: `company.brand_color`, `company.accent_color` 만 바꾸면 전체 색이 바뀝니다.

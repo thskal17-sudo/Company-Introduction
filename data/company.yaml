@@ -128,7 +128,11 @@ programs:
         subtitle: "취업 서류와 면접을 AI로 준비하는 실전 단계"
         items:
           - "M1. AI 자기소개서·면접 코칭 — 취업 맞춤형 경력 작성과 모의 면접"   # [확인 필요]
-    photos: []
+    # 아래 경로에 파일을 넣으면 자동으로 사진이 들어갑니다. 없는 동안에는 '사진 자리'로 표시됩니다.
+    photos:
+      - "assets/programs/ai-tour-1.jpg"
+      - "assets/programs/ai-tour-2.jpg"
+      - "assets/programs/ai-tour-3.jpg"
 
   - title: "취업·진로 교육 프로그램"
     en: "Career Program"
@@ -146,7 +150,11 @@ programs:
           - "진로 방향 명확화"
           - "자기 이해도 향상"
           - "취업 준비 동기 강화"
-    photos: []                      # 예) ["assets/programs/career-1.jpg", "assets/programs/career-2.jpg"]
+    photos:
+      - "assets/programs/career-1.jpg"
+      - "assets/programs/career-2.jpg"
+      - "assets/programs/career-3.jpg"
+      - "assets/programs/career-4.jpg"
 
   - title: "직업체험"
     en: "Job Experience"
@@ -167,7 +175,10 @@ programs:
           - "직업에 대한 현실적 이해"
           - "진로 선택 후회 감소"
           - "적극적인 참여와 몰입"
-    photos: []
+    photos:
+      - "assets/programs/job-1.jpg"
+      - "assets/programs/job-2.jpg"
+      - "assets/programs/job-3.jpg"
 
 # 차별화 포인트 (없으면 비워 두세요)
 strengths: []

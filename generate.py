@@ -52,15 +52,22 @@ def paragraphs(text) -> list[str]:
     return [" ".join(line.strip() for line in b.splitlines()).strip() for b in blocks if b.strip()]
 
 
+def resolve(rel_path: str, base: Path) -> Path | None:
+    """데이터 파일에 적힌 상대 경로를 실제 파일 경로로 바꿉니다. 없으면 None."""
+    if not rel_path:
+        return None
+    p = Path(rel_path)
+    if not p.is_absolute():
+        p = base / p
+    return p if p.is_file() else None
+
+
 def image_data_uri(rel_path: str, base: Path) -> str:
     """이미지 파일을 data URI 로 변환 (HTML 단일 파일용). 없으면 빈 문자열."""
     if not rel_path:
         return ""
-    p = Path(rel_path)
-    if not p.is_absolute():
-        p = base / p
-    if not p.is_file():
-        print(f"[경고] 이미지를 찾을 수 없습니다: {rel_path}", file=sys.stderr)
+    p = resolve(rel_path, base)
+    if p is None:
         return ""
     mime = mimetypes.guess_type(p.name)[0] or "image/png"
     return f"data:{mime};base64,{base64.b64encode(p.read_bytes()).decode()}"
@@ -78,11 +85,23 @@ def normalize(raw: dict, base: Path) -> dict:
     greeting["text"] = paragraphs(greeting.get("text"))
     d["greeting"] = greeting
     d["programs_heading"] = d.get("programs_heading") or {}
+    placeholders: list[str] = []
+
+    def slot(rel_path: str) -> dict:
+        """사진 한 장. 파일이 있으면 이미지로, 없으면 '자리'로 표시합니다."""
+        rel_path = rel_path or ""
+        if resolve(rel_path, base):
+            return {"src": image_data_uri(rel_path, base), "path": rel_path, "missing": False}
+        if rel_path:
+            placeholders.append(rel_path)
+        return {"src": "", "path": rel_path, "missing": bool(rel_path)}
+
     instructors = []
     for i in d.get("instructors") or []:
         i = dict(i)
         i["photo_path"] = i.get("photo") or ""
-        i["photo"] = image_data_uri(i.get("photo") or "", base)
+        i["photo_slot"] = slot(i.get("photo") or "")
+        i["photo"] = i["photo_slot"]["src"]
         i["bio"] = paragraphs(i.get("bio"))
         instructors.append(i)
     d["instructors"] = instructors
@@ -95,9 +114,13 @@ def normalize(raw: dict, base: Path) -> dict:
         p = dict(p)
         p["sections"] = p.get("sections") or []
         p["photo_paths"] = p.get("photos") or []
-        p["photos"] = [u for u in (image_data_uri(ph, base) for ph in p["photo_paths"]) if u]
+        p["photos"] = [slot(ph) for ph in p["photo_paths"]]
         programs.append(p)
     d["programs"] = programs
+    if placeholders:
+        print(f"[안내] 아직 없는 사진 {len(placeholders)}장은 소개서에 '사진 자리'로 표시됩니다:", file=sys.stderr)
+        for ph in placeholders:
+            print(f"        {ph}", file=sys.stderr)
     d["closing"] = d.get("closing") or {}
     d["generated_on"] = dt.date.today().strftime("%Y. %m")
     return d
@@ -374,9 +397,15 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
                 if sec.get("subtitle"):
                     doc.add_paragraph(sec["subtitle"])
                 bullets(sec.get("items"))
-            for photo in p_.get("photo_paths") or []:
-                if (base / photo).is_file():
-                    doc.add_picture(str(base / photo), width=Cm(7))
+            for ph in p_.get("photos") or []:
+                full = resolve(ph["path"], base)
+                if full:
+                    doc.add_picture(str(full), width=Cm(7))
+                elif ph["path"]:
+                    note = doc.add_paragraph()
+                    r = note.add_run(f"[사진 자리] {ph['path']}")
+                    r.italic = True
+                    r.font.color.rgb = RGBColor(0x99, 0x99, 0x99)
 
     # ---- 강점
     if data["strengths"]:

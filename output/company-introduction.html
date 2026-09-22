@@ -187,8 +187,13 @@
   .pd-section ul { margin: 0; padding-left: 4.5mm; font-size: 10.5pt; }
   .pd-section li { margin-bottom: 1.2mm; }
   .pd-section .sub { font-size: 9.5pt; color: var(--muted); margin-bottom: 1.5mm; }
-  .pd-photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(50mm, 1fr)); gap: 3mm; margin-top: 7mm; }
-  .pd-photos img { width: 100%; height: 42mm; object-fit: cover; border-radius: 6px; display: block; }
+  .pd-photos { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 3mm; margin-top: 7mm; }
+  .pd-photos img { width: 100%; height: var(--ph-h, 42mm); object-fit: cover; border-radius: 6px; display: block; }
+  .photo-slot { width: 100%; height: var(--ph-h, 42mm); border-radius: 6px; border: 1.5px dashed #c3c9d2; background: repeating-linear-gradient(45deg, #fafbfc, #fafbfc 6px, #f2f4f7 6px, #f2f4f7 12px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5mm; text-align: center; padding: 3mm; }
+  .photo-slot .ps-icon { font-size: 15pt; color: #aeb5bf; line-height: 1; }
+  .photo-slot .ps-label { font-size: 8.5pt; color: #8b939e; font-weight: 500; }
+  .photo-slot .ps-file { font-size: 7.5pt; color: #aeb5bf; word-break: break-all; }
+  .instructor .photo-slot { width: 42mm; height: 52mm; }
 
   /* ---- Strengths ---- */
   .strengths { display: grid; gap: 4mm; margin-top: 6mm; }
@@ -338,6 +343,11 @@
 <div class="sub">취업 서류와 면접을 AI로 준비하는 실전 단계</div>      <ul><li>M1. AI 자기소개서·면접 코칭 — 취업 맞춤형 경력 작성과 모의 면접</li></ul>
     </div>
   </div>
+  <div class="pd-photos" style="--cols:3;--ph-h:42mm">
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/ai-tour-1.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/ai-tour-2.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/ai-tour-3.jpg</div></div>
+  </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 <section class="page">
@@ -351,6 +361,12 @@
       <h4><span class="n">2.</span>기대 효과</h4>
       <ul><li>진로 방향 명확화</li><li>자기 이해도 향상</li><li>취업 준비 동기 강화</li></ul>
     </div>
+  </div>
+  <div class="pd-photos" style="--cols:2;--ph-h:52mm">
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-1.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-2.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-3.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-4.jpg</div></div>
   </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
@@ -369,6 +385,11 @@
       <h4><span class="n">3.</span>체험 효과</h4>
       <ul><li>직업에 대한 현실적 이해</li><li>진로 선택 후회 감소</li><li>적극적인 참여와 몰입</li></ul>
     </div>
+  </div>
+  <div class="pd-photos" style="--cols:3;--ph-h:42mm">
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/job-1.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/job-2.jpg</div></div>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/job-3.jpg</div></div>
   </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>

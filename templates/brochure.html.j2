@@ -187,8 +187,13 @@
   .pd-section ul { margin: 0; padding-left: 4.5mm; font-size: 10.5pt; }
   .pd-section li { margin-bottom: 1.2mm; }
   .pd-section .sub { font-size: 9.5pt; color: var(--muted); margin-bottom: 1.5mm; }
-  .pd-photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(50mm, 1fr)); gap: 3mm; margin-top: 7mm; }
-  .pd-photos img { width: 100%; height: 42mm; object-fit: cover; border-radius: 6px; display: block; }
+  .pd-photos { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 3mm; margin-top: 7mm; }
+  .pd-photos img { width: 100%; height: var(--ph-h, 42mm); object-fit: cover; border-radius: 6px; display: block; }
+  .photo-slot { width: 100%; height: var(--ph-h, 42mm); border-radius: 6px; border: 1.5px dashed #c3c9d2; background: repeating-linear-gradient(45deg, #fafbfc, #fafbfc 6px, #f2f4f7 6px, #f2f4f7 12px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5mm; text-align: center; padding: 3mm; }
+  .photo-slot .ps-icon { font-size: 15pt; color: #aeb5bf; line-height: 1; }
+  .photo-slot .ps-label { font-size: 8.5pt; color: #8b939e; font-weight: 500; }
+  .photo-slot .ps-file { font-size: 7.5pt; color: #aeb5bf; word-break: break-all; }
+  .instructor .photo-slot { width: 42mm; height: 52mm; }
 
   /* ---- Strengths ---- */
   .strengths { display: grid; gap: 4mm; margin-top: 6mm; }
@@ -420,7 +425,14 @@
     {% endfor %}
   </div>
   {% if p.photos %}
-  <div class="pd-photos">{% for ph in p.photos %}<img src="{{ ph }}" alt="{{ p.title }} 사진">{% endfor %}</div>
+  {% set cols = 3 if p.photos|length % 3 == 0 else 2 %}
+  <div class="pd-photos" style="--cols:{{ cols }};--ph-h:{{ '42mm' if cols == 3 else '52mm' }}">
+    {% for ph in p.photos %}
+      {% if ph.src %}<img src="{{ ph.src }}" alt="{{ p.title }} 사진">
+      {% else %}<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">{{ ph.path }}</div></div>
+      {% endif %}
+    {% endfor %}
+  </div>
   {% endif %}
   <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
 </section>
@@ -461,7 +473,9 @@
   <h2 class="section-title">강사 소개 <small>Our Instructors</small></h2>
   {% for i in chunk %}
   <div class="instructor">
-    {% if i.photo %}<img class="photo" src="{{ i.photo }}" alt="{{ i.name }}">{% else %}<div class="avatar">{{ i.name[:1] }}</div>{% endif %}
+    {% if i.photo %}<img class="photo" src="{{ i.photo }}" alt="{{ i.name }}">
+    {% elif i.photo_slot and i.photo_slot.missing %}<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">{{ i.photo_slot.path }}</div></div>
+    {% else %}<div class="avatar">{{ i.name[:1] }}</div>{% endif %}
     <div>
       <h3>{{ i.name }}</h3>
       {% if i.title %}<div class="role">{{ i.title }}</div>{% endif %}
