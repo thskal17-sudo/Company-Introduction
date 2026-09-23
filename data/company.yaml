@@ -13,12 +13,12 @@ company:
   slogan: ""                        # 표지에 크게 들어가는 한 줄 (없으면 비워 두세요)
   tagline: "학생에 맞춘 혁신적인 경력과 창업 교육을 지원합니다"   # [확인 필요] 기존 소개서 'VALUABLE SERVICE' 문구
   founded: ""                       # 예) 2018년 3월
-  ceo: "박서현"                      # [확인 필요] 기존 소개서 인사말 서명
+  ceo: "박서현"                      # 확인 완료
   logo: "assets/logo.png"           # 흰 배경용 로고 (비워 두면 회사명 텍스트로 대체)
   logo_white: "assets/logo-white.png"   # 어두운 표지용 흰색 로고 (없으면 logo 사용)
   brand_color: "#1E1E1E"            # 소개서 전체 포인트 색상
   accent_color: "#F4820F"           # 보조 색상
-  address: ""
+  address: ""                       # 공란 유지 (소개서에 표시하지 않음)
   phone: ""
   email: ""
   website: ""
