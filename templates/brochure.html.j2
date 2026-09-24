@@ -217,6 +217,27 @@
   .instructor .cols h4 { font-size: 9pt; color: var(--muted); letter-spacing: .05em; margin-bottom: 1mm; }
   .instructor .cols ul { margin: 0; padding-left: 4mm; font-size: 9.5pt; }
 
+  /* ---- Instructor grid (분야별 대표 강사) ---- */
+  .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+  .ins-card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; page-break-inside: avoid; break-inside: avoid; }
+  .ins-card .ph { width: 100%; height: 32mm; object-fit: cover; display: block; }
+  .ins-card .ph-slot { width: 100%; height: 32mm; border-bottom: 1px solid var(--line); }
+  .ins-card .ph-avatar { width: 100%; height: 32mm; background: color-mix(in srgb, var(--brand) 12%, white); color: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 26pt; font-weight: 900; }
+  .ins-card .body { padding: 3mm 3.5mm 3.5mm; display: flex; flex-direction: column; flex: 1; }
+  .ins-card .field { display: inline-block; align-self: flex-start; font-size: 8.5pt; font-weight: 700; color: #fff; background: var(--accent); border-radius: 999px; padding: 0.8mm 3mm; margin-bottom: 2mm; }
+  .ins-card .nm { font-size: 12pt; font-weight: 700; }
+  .ins-card .nm .todo { color: #b8bec7; font-weight: 500; }
+  .ins-card .rl { font-size: 9pt; color: var(--muted); margin-top: 0.3mm; }
+  .ins-card .qt { font-size: 8.5pt; line-height: 1.45; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 2.5mm; margin-top: 2mm; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ins-card .tg { display: flex; flex-wrap: wrap; gap: 1.2mm; margin-top: 2mm; }
+  .ins-card .tg span { font-size: 8pt; background: color-mix(in srgb, var(--brand) 8%, white); color: var(--brand); border-radius: 999px; padding: 0.5mm 2.5mm; }
+  .ins-card ul { margin: 1.5mm 0 0; padding-left: 3.5mm; font-size: 8.5pt; line-height: 1.45; color: var(--ink); }
+  .ins-card ul li { margin-bottom: 0.6mm; }
+  .ins-card h5 { font-size: 7.5pt; color: var(--muted); letter-spacing: .05em; margin: 2mm 0 0.3mm; font-weight: 500; }
+  .ins-card .one-line { font-size: 8.5pt; line-height: 1.45; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 1.5mm; }
+  .ins-card .one-line.clamp1 { -webkit-line-clamp: 1; }
+  .ins-card .one-line .lbl { color: var(--muted); font-size: 7.5pt; margin-right: 1.5mm; }
+
   /* ---- Clients / testimonials ---- */
   .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
   .client { background: var(--bg); border-radius: 6px; padding: 3mm; text-align: center; font-size: 10.5pt; font-weight: 500; }
@@ -466,8 +487,40 @@
 </section>
 {% endif %}
 
-{# ================= 강사 소개 (한 페이지당 2명) ================= #}
-{% if instructors %}
+{# ================= 강사 소개 =================
+   3명 이상이면 한 페이지에 모아 보여주는 카드 그리드, 2명 이하면 상세 배치.
+   instructors_layout 에 "grid" 또는 "detail" 을 적어 직접 고를 수도 있습니다. #}
+{% set ins_grid = instructors_layout == 'grid' or (instructors_layout != 'detail' and instructors|length > 2) %}
+{% if instructors and ins_grid %}
+{% for chunk in instructors|batch(6) %}
+<section class="page">
+  <h2 class="section-title">{{ instructors_heading or '분야별 대표 강사' }} <small>Our Instructors</small></h2>
+  {% if instructors_subtitle and loop.first %}<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">{{ instructors_subtitle }}</p>{% endif %}
+  <div class="ins-grid">
+    {% for i in chunk %}
+    <div class="ins-card">
+      {% if i.photo %}<img class="ph" src="{{ i.photo }}" alt="{{ i.name }}">
+      {% elif i.photo_slot and i.photo_slot.missing %}<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">{{ i.photo_slot.path }}</div></div>
+      {% elif i.name %}<div class="ph-avatar">{{ i.name[:1] }}</div>
+      {% else %}<div class="ph-avatar">▨</div>{% endif %}
+      <div class="body">
+        {% if i.field %}<span class="field">{{ i.field }}</span>{% endif %}
+        <div class="nm">{% if i.name %}{{ i.name }}{% else %}<span class="todo">성함</span>{% endif %}</div>
+        {% if i.title %}<div class="rl">{{ i.title }}</div>{% endif %}
+        {% if i.quote %}<div class="qt">“{{ i.quote }}”</div>{% endif %}
+        {% if i.specialties %}<div class="tg">{% for t in i.specialties[:3] %}<span>{{ t }}</span>{% endfor %}</div>{% endif %}
+        {% if i.career %}<div class="one-line" style="margin-top:2mm"><span class="lbl">경력</span>{{ i.career|join(' · ') }}</div>{% endif %}
+        {% if i.certifications %}<div class="one-line clamp1"><span class="lbl">자격</span>{{ i.certifications|join(' · ') }}</div>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
+</section>
+{% endfor %}
+{% endif %}
+
+{% if instructors and not ins_grid %}
 {% for chunk in instructors|batch(2) %}
 <section class="page">
   <h2 class="section-title">강사 소개 <small>Our Instructors</small></h2>

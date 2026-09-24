@@ -85,6 +85,9 @@ def normalize(raw: dict, base: Path) -> dict:
     greeting["text"] = paragraphs(greeting.get("text"))
     d["greeting"] = greeting
     d["programs_heading"] = d.get("programs_heading") or {}
+    d["instructors_layout"] = d.get("instructors_layout") or "auto"
+    d["instructors_heading"] = d.get("instructors_heading") or ""
+    d["instructors_subtitle"] = d.get("instructors_subtitle") or ""
     placeholders: list[str] = []
 
     def slot(rel_path: str) -> dict:
@@ -418,7 +421,9 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
     # ---- 강사
     if data["instructors"]:
         doc.add_page_break()
-        heading("강사 소개", 1)
+        heading(data["instructors_heading"] or "강사 소개", 1)
+        if data["instructors_subtitle"]:
+            doc.add_paragraph(data["instructors_subtitle"])
         for ins in data["instructors"]:
             t = doc.add_table(rows=1, cols=2)
             left, right = t.rows[0].cells
@@ -429,7 +434,9 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
             else:
                 left.text = ""
             rp = right.paragraphs[0]
-            r = rp.add_run(ins.get("name", "")); r.bold = True; r.font.size = Pt(15); r.font.color.rgb = brand
+            if ins.get("field"):
+                fr = rp.add_run(f"[{ins['field']}] "); fr.bold = True; fr.font.size = Pt(10)
+            r = rp.add_run(ins.get("name") or "(성함)"); r.bold = True; r.font.size = Pt(15); r.font.color.rgb = brand
             if ins.get("title"):
                 rp.add_run(f"   {ins['title']}").font.size = Pt(10)
             if ins.get("specialties"):

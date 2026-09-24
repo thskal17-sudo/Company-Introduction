@@ -25,8 +25,15 @@
 
 ## 강사 사진 — `assets/instructors/`
 
-강사 이름에 맞춰 자유롭게 지으시고, `data/company.yaml` 의 강사 `photo` 항목에 경로를 적으면 됩니다.
-예) `assets/instructors/kim.jpg`
+분야별 대표 강사 5명의 사진 자리가 아래 이름으로 잡혀 있습니다.
+
+| 파일 | 분야 |
+|---|---|
+| `daepyo.jpg` | 대표 |
+| `image.jpg` | 이미지 |
+| `speech.jpg` | 스피치 |
+| `resume.jpg` | 자소서 |
+| `ai.jpg` | AI |
 
 - 세로 사진을 권장합니다. 가로 세로 비율 3:4 정도가 가장 잘 맞습니다.
 - 사진이 없으면 이름 첫 글자로 된 동그란 아바타가 대신 들어갑니다.

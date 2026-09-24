@@ -53,7 +53,9 @@ python generate.py -d data/other.yaml -o dist -n brochure   # 다른 데이터 �
 | `programs_heading` | 프로그램 카드 페이지 제목 (`title`, `en`, `subtitle`) | 비우면 '교육 프로그램' |
 | `programs` | 교육 프로그램. `sections`(`title`, `subtitle`, `items`)가 있으면 한 페이지씩 상세 페이지, `features`만 있으면 카드로 모아 표시. `photos`에 사진 경로 | 문장 안의 `**강조**`는 포인트 색으로 표시 |
 | `strengths` | 차별화 포인트 (`title`, `description`) | |
-| `instructors` | 강사 (`name`, `title`, `photo`, `quote`, `bio`, `specialties`, `career`, `education`, `certifications`) | 한 페이지에 2명씩 배치 |
+| `instructors` | 강사 (`field`, `name`, `title`, `photo`, `quote`, `bio`, `specialties`, `career`, `education`, `certifications`) | 3명 이상이면 카드 그리드, 2명 이하면 상세 배치 |
+| `instructors_layout` | `grid` / `detail` / `auto` | 배치를 직접 고를 때 사용 |
+| `instructors_heading`, `instructors_subtitle` | 강사 페이지 제목과 설명 | 비우면 '강사 소개' |
 | `clients` | 주요 고객사 이름 목록 | |
 | `testimonials` | 후기 (`quote`, `author`) | |
 | `closing` | 마무리 문구 (`headline`, `message`) | 고객사·후기가 없으면 마지막 페이지가 뒷표지 형태로 생성 |

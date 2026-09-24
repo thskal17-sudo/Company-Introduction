@@ -182,21 +182,65 @@ programs:
 # 차별화 포인트 (없으면 비워 두세요)
 strengths: []
 
-# 강사 소개
-#  - 강사 정보를 받는 대로 아래 형식으로 채워 주세요. 한 페이지에 2명씩 배치됩니다.
-#  - 작성 양식은 data/작성양식.md 를 참고하세요.
-#  - 예시:
-#  - name: "김강사"
-#    title: "대표 강사"
-#    photo: "assets/instructors/kim.jpg"   # 세로 사진 권장 (없으면 이름 첫 글자 아바타)
-#    quote: "한 줄 소개 문구"
-#    bio: |
-#      강사 소개 문단입니다.
-#    specialties: ["생성형 AI 활용", "진로·취업 코칭"]
-#    career: ["現 한국엑스퍼트교육원 대표 강사", "前 ○○ 교육 담당"]
-#    education: ["○○대학교 ○○학과"]
-#    certifications: ["○○ 자격"]
-instructors: []
+# 강사 소개 — 분야별 대표 강사 5명
+#  - 이름, 경력 등은 정보를 받는 대로 채웁니다. 지금은 분야와 사진 자리만 잡아 두었습니다.
+#  - field: 카드 위에 주황색 배지로 표시되는 분야 이름
+#  - quote: 한 줄 소개 문구 (선택) / career, certifications 는 카드에 각각 3개, 2개까지 표시됩니다.
+#  - 사진은 assets/instructors/ 에 아래 파일명으로 넣어 주세요. 세로 사진(3:4)을 권장합니다.
+instructors_heading: "분야별 대표 강사"
+instructors_subtitle: "다섯 개 분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다."
+instructors_layout: "grid"        # grid(한 페이지에 카드로) / detail(한 명씩 자세히) / auto
+instructors:
+  - field: "대표"
+    name: ""
+    title: "대표 강사"
+    photo: "assets/instructors/daepyo.jpg"
+    quote: ""
+    bio: ""
+    specialties: []
+    career: []
+    education: []
+    certifications: []
+  - field: "이미지"
+    name: ""
+    title: "이미지 분야 대표 강사"
+    photo: "assets/instructors/image.jpg"
+    quote: ""
+    bio: ""
+    specialties: []
+    career: []
+    education: []
+    certifications: []
+  - field: "스피치"
+    name: ""
+    title: "스피치 분야 대표 강사"
+    photo: "assets/instructors/speech.jpg"
+    quote: ""
+    bio: ""
+    specialties: []
+    career: []
+    education: []
+    certifications: []
+  - field: "자소서"
+    name: ""
+    title: "자소서 분야 대표 강사"
+    photo: "assets/instructors/resume.jpg"
+    quote: ""
+    bio: ""
+    specialties: []
+    career: []
+    education: []
+    certifications: []
+  - field: "AI"
+    name: ""
+    title: "AI 분야 대표 강사"
+    photo: "assets/instructors/ai.jpg"
+    quote: ""
+    bio: ""
+    specialties: []
+    career: []
+    education: []
+    certifications: []
 
 # 주요 고객사 / 파트너 (없으면 비워 두세요)
 clients: []
