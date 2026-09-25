@@ -182,17 +182,16 @@ programs:
 # 차별화 포인트 (없으면 비워 두세요)
 strengths: []
 
-# 강사 소개 — 분야별 대표 강사 5명
-#  - 이름, 경력 등은 정보를 받는 대로 채웁니다. 지금은 분야와 사진 자리만 잡아 두었습니다.
+# 강사 소개 — 분야별 대표 강사
 #  - field: 카드 위에 주황색 배지로 표시되는 분야 이름
-#  - quote: 한 줄 소개 문구 (선택) / career, certifications 는 카드에 각각 3개, 2개까지 표시됩니다.
+#  - quote: 한 줄 소개 문구 (선택) / career, certifications 는 카드 폭에 맞춰 길면 줄임표로 잘립니다.
 #  - 사진은 assets/instructors/ 에 아래 파일명으로 넣어 주세요. 세로 사진(3:4)을 권장합니다.
 instructors_heading: "분야별 대표 강사"
-instructors_subtitle: "다섯 개 분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다."
+instructors_subtitle: "분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다."
 instructors_layout: "grid"        # grid(한 페이지에 카드로) / detail(한 명씩 자세히) / auto
 instructors:
-  - field: "대표"
-    name: ""
+  - field: "대표 · 자소서"
+    name: "박서현"
     title: "대표 강사"
     photo: "assets/instructors/daepyo.jpg"
     quote: ""
@@ -202,7 +201,7 @@ instructors:
     education: []
     certifications: []
   - field: "이미지"
-    name: ""
+    name: "허나영"
     title: "이미지 분야 대표 강사"
     photo: "assets/instructors/image.jpg"
     quote: ""
@@ -212,7 +211,7 @@ instructors:
     education: []
     certifications: []
   - field: "스피치"
-    name: ""
+    name: "이석희"
     title: "스피치 분야 대표 강사"
     photo: "assets/instructors/speech.jpg"
     quote: ""
@@ -221,18 +220,8 @@ instructors:
     career: []
     education: []
     certifications: []
-  - field: "자소서"
-    name: ""
-    title: "자소서 분야 대표 강사"
-    photo: "assets/instructors/resume.jpg"
-    quote: ""
-    bio: ""
-    specialties: []
-    career: []
-    education: []
-    certifications: []
   - field: "AI"
-    name: ""
+    name: "강명주"
     title: "AI 분야 대표 강사"
     photo: "assets/instructors/ai.jpg"
     quote: ""

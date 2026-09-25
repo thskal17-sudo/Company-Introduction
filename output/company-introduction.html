@@ -218,11 +218,13 @@
   .instructor .cols ul { margin: 0; padding-left: 4mm; font-size: 9.5pt; }
 
   /* ---- Instructor grid (분야별 대표 강사) ---- */
-  .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+  .ins-grid { display: grid; grid-template-columns: repeat(var(--ins-cols, 3), 1fr); gap: 3.5mm; }
+  /* 카드가 적어 아래가 비면 세로 가운데쯤에 놓이도록 합니다. */
+  .ins-grid.few { margin-top: auto; margin-bottom: auto; }
   .ins-card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; page-break-inside: avoid; break-inside: avoid; }
-  .ins-card .ph { width: 100%; height: 32mm; object-fit: cover; display: block; }
-  .ins-card .ph-slot { width: 100%; height: 32mm; border-bottom: 1px solid var(--line); }
-  .ins-card .ph-avatar { width: 100%; height: 32mm; background: color-mix(in srgb, var(--brand) 12%, white); color: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 26pt; font-weight: 900; }
+  .ins-card .ph { width: 100%; height: var(--ins-ph, 32mm); object-fit: cover; display: block; }
+  .ins-card .ph-slot { width: 100%; height: var(--ins-ph, 32mm); border-bottom: 1px solid var(--line); }
+  .ins-card .ph-avatar { width: 100%; height: var(--ins-ph, 32mm); background: color-mix(in srgb, var(--brand) 12%, white); color: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 26pt; font-weight: 900; }
   .ins-card .body { padding: 3mm 3.5mm 3.5mm; display: flex; flex-direction: column; flex: 1; }
   .ins-card .field { display: inline-block; align-self: flex-start; font-size: 8.5pt; font-weight: 700; color: #fff; background: var(--accent); border-radius: 999px; padding: 0.8mm 3mm; margin-bottom: 2mm; }
   .ins-card .nm { font-size: 12pt; font-weight: 700; }
@@ -417,35 +419,29 @@
 
 <section class="page">
   <h2 class="section-title">분야별 대표 강사 <small>Our Instructors</small></h2>
-<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">다섯 개 분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다.</p>  <div class="ins-grid">
+<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다.</p>  <div class="ins-grid few" style="--ins-cols:4;--ins-ph:58mm">
     <div class="ins-card">
 <div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/daepyo.jpg</div></div>
       <div class="body">
-<span class="field">대표</span>        <div class="nm"><span class="todo">성함</span></div>
+<span class="field">대표 · 자소서</span>        <div class="nm">박서현</div>
 <div class="rl">대표 강사</div>      </div>
     </div>
     <div class="ins-card">
 <div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/image.jpg</div></div>
       <div class="body">
-<span class="field">이미지</span>        <div class="nm"><span class="todo">성함</span></div>
+<span class="field">이미지</span>        <div class="nm">허나영</div>
 <div class="rl">이미지 분야 대표 강사</div>      </div>
     </div>
     <div class="ins-card">
 <div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/speech.jpg</div></div>
       <div class="body">
-<span class="field">스피치</span>        <div class="nm"><span class="todo">성함</span></div>
+<span class="field">스피치</span>        <div class="nm">이석희</div>
 <div class="rl">스피치 분야 대표 강사</div>      </div>
-    </div>
-    <div class="ins-card">
-<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/resume.jpg</div></div>
-      <div class="body">
-<span class="field">자소서</span>        <div class="nm"><span class="todo">성함</span></div>
-<div class="rl">자소서 분야 대표 강사</div>      </div>
     </div>
     <div class="ins-card">
 <div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/ai.jpg</div></div>
       <div class="body">
-<span class="field">AI</span>        <div class="nm"><span class="todo">성함</span></div>
+<span class="field">AI</span>        <div class="nm">강명주</div>
 <div class="rl">AI 분야 대표 강사</div>      </div>
     </div>
   </div>

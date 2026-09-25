@@ -218,11 +218,13 @@
   .instructor .cols ul { margin: 0; padding-left: 4mm; font-size: 9.5pt; }
 
   /* ---- Instructor grid (분야별 대표 강사) ---- */
-  .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+  .ins-grid { display: grid; grid-template-columns: repeat(var(--ins-cols, 3), 1fr); gap: 3.5mm; }
+  /* 카드가 적어 아래가 비면 세로 가운데쯤에 놓이도록 합니다. */
+  .ins-grid.few { margin-top: auto; margin-bottom: auto; }
   .ins-card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; page-break-inside: avoid; break-inside: avoid; }
-  .ins-card .ph { width: 100%; height: 32mm; object-fit: cover; display: block; }
-  .ins-card .ph-slot { width: 100%; height: 32mm; border-bottom: 1px solid var(--line); }
-  .ins-card .ph-avatar { width: 100%; height: 32mm; background: color-mix(in srgb, var(--brand) 12%, white); color: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 26pt; font-weight: 900; }
+  .ins-card .ph { width: 100%; height: var(--ins-ph, 32mm); object-fit: cover; display: block; }
+  .ins-card .ph-slot { width: 100%; height: var(--ins-ph, 32mm); border-bottom: 1px solid var(--line); }
+  .ins-card .ph-avatar { width: 100%; height: var(--ins-ph, 32mm); background: color-mix(in srgb, var(--brand) 12%, white); color: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 26pt; font-weight: 900; }
   .ins-card .body { padding: 3mm 3.5mm 3.5mm; display: flex; flex-direction: column; flex: 1; }
   .ins-card .field { display: inline-block; align-self: flex-start; font-size: 8.5pt; font-weight: 700; color: #fff; background: var(--accent); border-radius: 999px; padding: 0.8mm 3mm; margin-bottom: 2mm; }
   .ins-card .nm { font-size: 12pt; font-weight: 700; }
@@ -496,7 +498,8 @@
 <section class="page">
   <h2 class="section-title">{{ instructors_heading or '분야별 대표 강사' }} <small>Our Instructors</small></h2>
   {% if instructors_subtitle and loop.first %}<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">{{ instructors_subtitle }}</p>{% endif %}
-  <div class="ins-grid">
+  {% set ins_cols = chunk|length if chunk|length <= 4 else 3 %}
+  <div class="ins-grid{{ ' few' if chunk|length <= 4 else '' }}" style="--ins-cols:{{ ins_cols }};--ins-ph:{{ {1:'70mm', 2:'62mm', 3:'32mm', 4:'58mm'}.get(ins_cols, '32mm') }}">
     {% for i in chunk %}
     <div class="ins-card">
       {% if i.photo %}<img class="ph" src="{{ i.photo }}" alt="{{ i.name }}">
