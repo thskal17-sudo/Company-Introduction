@@ -182,6 +182,12 @@
   .pd-intro { font-size: 13pt; font-weight: 500; line-height: 1.6; margin-bottom: 7mm; }
   .pd-intro b { color: var(--accent); }
   .pd-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(60mm, 1fr)); gap: 5mm 8mm; }
+  /* 사진이 없을 때는 섹션을 카드로 만들어 지면을 채웁니다. */
+  .pd-sections.spread { flex: 1; align-content: center; grid-auto-rows: min-content; gap: 6mm; }
+  .pd-sections.spread .pd-section { background: var(--bg); border-radius: 8px; padding: 7mm 7mm 6mm; border-top: 3px solid var(--accent); }
+  .pd-sections.spread h4 { font-size: 12.5pt; }
+  .pd-sections.spread ul { font-size: 11pt; line-height: 1.8; padding-left: 5mm; }
+  .pd-sections.spread .sub { font-size: 10pt; margin-bottom: 3mm; }
   .pd-section h4 { font-size: 11.5pt; color: var(--brand); margin-bottom: 2mm; }
   .pd-section h4 .n { color: var(--accent); margin-right: 1.5mm; }
   .pd-section ul { margin: 0; padding-left: 4.5mm; font-size: 10.5pt; }
@@ -239,6 +245,18 @@
   .ins-card .one-line { font-size: 8.5pt; line-height: 1.45; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 1.5mm; }
   .ins-card .one-line.clamp1 { -webkit-line-clamp: 1; }
   .ins-card .one-line .lbl { color: var(--muted); font-size: 7.5pt; margin-right: 1.5mm; }
+
+  /* ---- Instructor cards without photos ---- */
+  .ins-grid.nophoto { grid-template-columns: repeat(2, 1fr); gap: 6mm; flex: 1; align-content: center; }
+  .ins-grid.nophoto .ins-card { align-items: center; text-align: center; padding: 9mm 7mm; border-radius: 10px; }
+  .ins-grid.nophoto .initial { width: 24mm; height: 24mm; border-radius: 50%; background: var(--accent); color: #fff; font-size: 17pt; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-bottom: 5mm; }
+  .ins-grid.nophoto .body { padding: 0; align-items: center; text-align: center; }
+  .ins-grid.nophoto .field { align-self: center; font-size: 9pt; padding: 1mm 4mm; }
+  .ins-grid.nophoto .nm { font-size: 17pt; margin-top: 1.5mm; }
+  .ins-grid.nophoto .rl { font-size: 10.5pt; margin-top: 1mm; }
+  .ins-grid.nophoto .qt { border-left: none; padding: 0; text-align: center; font-size: 9.5pt; margin-top: 3mm; }
+  .ins-grid.nophoto .tg { justify-content: center; margin-top: 3mm; }
+  .ins-grid.nophoto .one-line { text-align: center; }
 
   /* ---- Clients / testimonials ---- */
   .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
@@ -352,7 +370,7 @@
 
 <section class="page">
   <h2 class="section-title">AI 투어 메이커 프로그램 <small>AI Tour Maker Programs</small></h2>
-<div class="pd-target">활용 대상 &nbsp;|&nbsp; 관광고등학교 1~3학년</div><div class="pd-intro">기초부터 실전 취업까지, 관광고등학교 맞춤형 <b>3단계 성장 로드맵</b></div>  <div class="pd-sections">
+<div class="pd-target">활용 대상 &nbsp;|&nbsp; 관광고등학교 1~3학년</div><div class="pd-intro">기초부터 실전 취업까지, 관광고등학교 맞춤형 <b>3단계 성장 로드맵</b></div>  <div class="pd-sections spread">
     <div class="pd-section">
       <h4><span class="n">1.</span>[1학년] AI 워밍업 (Explore)</h4>
 <div class="sub">생성형 AI와 친해지고 나의 관광 진로를 탐색하는 단계</div>      <ul><li>M1. AI 첫 만남 &amp; 프롬프트 놀이 — 생성형 AI 활용 미니 게임과 &#39;말로 그림 그리기&#39; 학습</li><li>M2. 나의 관광 직업 지도 — AI 커리어 코치와 적성·흥미 대화 기반 직업 추천</li></ul>
@@ -366,16 +384,11 @@
 <div class="sub">취업 서류와 면접을 AI로 준비하는 실전 단계</div>      <ul><li>M1. AI 자기소개서·면접 코칭 — 취업 맞춤형 경력 작성과 모의 면접</li></ul>
     </div>
   </div>
-  <div class="pd-photos" style="--cols:3;--ph-h:42mm">
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/ai-tour-1.jpg</div></div>
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/ai-tour-2.jpg</div></div>
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/ai-tour-3.jpg</div></div>
-  </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 <section class="page">
   <h2 class="section-title">취업·진로 교육 프로그램 <small>Career Program</small></h2>
-<div class="pd-target">활용 대상 &nbsp;|&nbsp; 고등·대학생 / 취업 준비생 / 직무 역량 강화 과정</div><div class="pd-intro"><b>&#39;무엇을 해야 할지 모른다&#39;</b>는 고민을 실행 가능한 진로 로드맵으로 바꿉니다.</div>  <div class="pd-sections">
+<div class="pd-target">활용 대상 &nbsp;|&nbsp; 고등·대학생 / 취업 준비생 / 직무 역량 강화 과정</div><div class="pd-intro"><b>&#39;무엇을 해야 할지 모른다&#39;</b>는 고민을 실행 가능한 진로 로드맵으로 바꿉니다.</div>  <div class="pd-sections spread">
     <div class="pd-section">
       <h4><span class="n">1.</span>주요 교육 내용</h4>
       <ul><li>AI 활용 취업 준비</li><li>인사 담당자를 사로잡는 자기소개·면접 기초</li><li>직무 이해 및 기업 분석</li><li>나의 강점·적성 탐색</li></ul>
@@ -385,16 +398,11 @@
       <ul><li>진로 방향 명확화</li><li>자기 이해도 향상</li><li>취업 준비 동기 강화</li></ul>
     </div>
   </div>
-  <div class="pd-photos" style="--cols:3;--ph-h:42mm">
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-1.jpg</div></div>
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-2.jpg</div></div>
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/career-3.jpg</div></div>
-  </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 <section class="page">
   <h2 class="section-title">직업체험 <small>Job Experience</small></h2>
-<div class="pd-target">활용 대상 &nbsp;|&nbsp; 중·고등학생</div><div class="pd-intro">직업체험은 보는 체험이 아닌, <b>해보는 경험</b>이어야 합니다. 직업은 설명만으로는 이해할 수 없습니다.</div>  <div class="pd-sections">
+<div class="pd-target">활용 대상 &nbsp;|&nbsp; 중·고등학생</div><div class="pd-intro">직업체험은 보는 체험이 아닌, <b>해보는 경험</b>이어야 합니다. 직업은 설명만으로는 이해할 수 없습니다.</div>  <div class="pd-sections spread">
     <div class="pd-section">
       <h4><span class="n">1.</span>주요 직업체험 분야</h4>
       <ul><li>서비스·항공·호텔</li><li>미래 직업·신산업</li><li>학생 맞춤 직무 체험</li></ul>
@@ -408,38 +416,33 @@
       <ul><li>직업에 대한 현실적 이해</li><li>진로 선택 후회 감소</li><li>적극적인 참여와 몰입</li></ul>
     </div>
   </div>
-  <div class="pd-photos" style="--cols:3;--ph-h:42mm">
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/job-1.jpg</div></div>
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/job-2.jpg</div></div>
-<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/programs/job-3.jpg</div></div>
-  </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
 
 
 <section class="page">
   <h2 class="section-title">분야별 대표 강사 <small>Our Instructors</small></h2>
-<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다.</p>  <div class="ins-grid few" style="--ins-cols:4;--ins-ph:58mm">
+<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다.</p>  <div class="ins-grid few nophoto" style="--ins-cols:4;--ins-ph:58mm">
     <div class="ins-card">
-<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/daepyo.jpg</div></div>
+<div class="initial">박</div>
       <div class="body">
 <span class="field">대표 · 자소서</span>        <div class="nm">박서현</div>
 <div class="rl">대표 강사</div>      </div>
     </div>
     <div class="ins-card">
-<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/image.jpg</div></div>
+<div class="initial">허</div>
       <div class="body">
 <span class="field">이미지</span>        <div class="nm">허나영</div>
 <div class="rl">이미지 분야 대표 강사</div>      </div>
     </div>
     <div class="ins-card">
-<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/speech.jpg</div></div>
+<div class="initial">이</div>
       <div class="body">
 <span class="field">스피치</span>        <div class="nm">이석희</div>
 <div class="rl">스피치 분야 대표 강사</div>      </div>
     </div>
     <div class="ins-card">
-<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/instructors/ai.jpg</div></div>
+<div class="initial">강</div>
       <div class="body">
 <span class="field">AI</span>        <div class="nm">강명주</div>
 <div class="rl">AI 분야 대표 강사</div>      </div>

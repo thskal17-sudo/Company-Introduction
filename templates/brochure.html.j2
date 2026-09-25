@@ -182,6 +182,12 @@
   .pd-intro { font-size: 13pt; font-weight: 500; line-height: 1.6; margin-bottom: 7mm; }
   .pd-intro b { color: var(--accent); }
   .pd-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(60mm, 1fr)); gap: 5mm 8mm; }
+  /* 사진이 없을 때는 섹션을 카드로 만들어 지면을 채웁니다. */
+  .pd-sections.spread { flex: 1; align-content: center; grid-auto-rows: min-content; gap: 6mm; }
+  .pd-sections.spread .pd-section { background: var(--bg); border-radius: 8px; padding: 7mm 7mm 6mm; border-top: 3px solid var(--accent); }
+  .pd-sections.spread h4 { font-size: 12.5pt; }
+  .pd-sections.spread ul { font-size: 11pt; line-height: 1.8; padding-left: 5mm; }
+  .pd-sections.spread .sub { font-size: 10pt; margin-bottom: 3mm; }
   .pd-section h4 { font-size: 11.5pt; color: var(--brand); margin-bottom: 2mm; }
   .pd-section h4 .n { color: var(--accent); margin-right: 1.5mm; }
   .pd-section ul { margin: 0; padding-left: 4.5mm; font-size: 10.5pt; }
@@ -239,6 +245,18 @@
   .ins-card .one-line { font-size: 8.5pt; line-height: 1.45; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 1.5mm; }
   .ins-card .one-line.clamp1 { -webkit-line-clamp: 1; }
   .ins-card .one-line .lbl { color: var(--muted); font-size: 7.5pt; margin-right: 1.5mm; }
+
+  /* ---- Instructor cards without photos ---- */
+  .ins-grid.nophoto { grid-template-columns: repeat(2, 1fr); gap: 6mm; flex: 1; align-content: center; }
+  .ins-grid.nophoto .ins-card { align-items: center; text-align: center; padding: 9mm 7mm; border-radius: 10px; }
+  .ins-grid.nophoto .initial { width: 24mm; height: 24mm; border-radius: 50%; background: var(--accent); color: #fff; font-size: 17pt; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-bottom: 5mm; }
+  .ins-grid.nophoto .body { padding: 0; align-items: center; text-align: center; }
+  .ins-grid.nophoto .field { align-self: center; font-size: 9pt; padding: 1mm 4mm; }
+  .ins-grid.nophoto .nm { font-size: 17pt; margin-top: 1.5mm; }
+  .ins-grid.nophoto .rl { font-size: 10.5pt; margin-top: 1mm; }
+  .ins-grid.nophoto .qt { border-left: none; padding: 0; text-align: center; font-size: 9.5pt; margin-top: 3mm; }
+  .ins-grid.nophoto .tg { justify-content: center; margin-top: 3mm; }
+  .ins-grid.nophoto .one-line { text-align: center; }
 
   /* ---- Clients / testimonials ---- */
   .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
@@ -438,7 +456,7 @@
   <h2 class="section-title">{{ p.title }} {% if p.en %}<small>{{ p.en }}</small>{% endif %}</h2>
   {% if p.target %}<div class="pd-target">활용 대상 &nbsp;|&nbsp; {{ p.target }}</div>{% endif %}
   {% if p.summary %}<div class="pd-intro">{{ p.summary|emph }}</div>{% endif %}
-  <div class="pd-sections">
+  <div class="pd-sections{{ ' spread' if not p.photos else '' }}">
     {% for sec in p.sections %}
     <div class="pd-section">
       <h4><span class="n">{{ loop.index }}.</span>{{ sec.title }}</h4>
@@ -498,12 +516,14 @@
 <section class="page">
   <h2 class="section-title">{{ instructors_heading or '분야별 대표 강사' }} <small>Our Instructors</small></h2>
   {% if instructors_subtitle and loop.first %}<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">{{ instructors_subtitle }}</p>{% endif %}
+  {% set has_photo = chunk|selectattr('photo')|list or chunk|selectattr('photo_slot.missing')|list %}
   {% set ins_cols = chunk|length if chunk|length <= 4 else 3 %}
-  <div class="ins-grid{{ ' few' if chunk|length <= 4 else '' }}" style="--ins-cols:{{ ins_cols }};--ins-ph:{{ {1:'70mm', 2:'62mm', 3:'32mm', 4:'58mm'}.get(ins_cols, '32mm') }}">
+  <div class="ins-grid{{ ' few' if chunk|length <= 4 else '' }}{{ '' if has_photo else ' nophoto' }}" style="--ins-cols:{{ ins_cols }};--ins-ph:{{ {1:'70mm', 2:'62mm', 3:'32mm', 4:'58mm'}.get(ins_cols, '32mm') }}">
     {% for i in chunk %}
     <div class="ins-card">
       {% if i.photo %}<img class="ph" src="{{ i.photo }}" alt="{{ i.name }}">
       {% elif i.photo_slot and i.photo_slot.missing %}<div class="photo-slot ph-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">{{ i.photo_slot.path }}</div></div>
+      {% elif not has_photo %}<div class="initial">{{ i.name[:1] if i.name else '·' }}</div>
       {% elif i.name %}<div class="ph-avatar">{{ i.name[:1] }}</div>
       {% else %}<div class="ph-avatar">▨</div>{% endif %}
       <div class="body">
