@@ -220,7 +220,7 @@ instructors_heading: "분야별 대표 강사"
 instructors_subtitle: "분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다."
 instructors_layout: "grid"        # grid(한 페이지에 카드로) / detail(한 명씩 자세히) / auto
 instructors:
-  - field: "대표 · 자소서"
+  - field: "대표 · 자소서 · 창업"
     name: "박서현"
     title: "대표 강사"
     photo: ""                       # 사진 파일: assets/instructors/daepyo.jpg
