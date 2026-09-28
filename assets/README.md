@@ -23,6 +23,7 @@
 | `ai-tour-1.jpg` ~ `ai-tour-3.jpg` | AI 투어 메이커 프로그램 |
 | `career-1.jpg` ~ `career-3.jpg` | 취업·진로 교육 프로그램 |
 | `job-1.jpg` ~ `job-3.jpg` | 직업체험 |
+| `startup-1.jpg` ~ `startup-3.jpg` | 창업 교육 프로그램 |
 
 - 가로 사진을 권장합니다. 짧은 변이 800px 이상이면 인쇄해도 깨지지 않습니다.
 - 장수를 늘리거나 줄이려면 `data/company.yaml` 의 해당 프로그램 `photos` 목록을 고치면 됩니다.
