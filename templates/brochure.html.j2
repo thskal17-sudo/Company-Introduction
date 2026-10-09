@@ -258,6 +258,13 @@
   .ins-grid.nophoto .tg { justify-content: center; margin-top: 3mm; }
   .ins-grid.nophoto .one-line { text-align: center; }
 
+  /* ---- Gallery (활동 사진) ---- */
+  .gallery { display: grid; grid-template-columns: repeat(var(--g-cols, 3), 1fr); gap: 4mm; flex: 1; align-content: center; }
+  .gallery figure { margin: 0; }
+  .gallery img { width: 100%; height: var(--g-h, 52mm); object-fit: cover; border-radius: 6px; display: block; }
+  .gallery .photo-slot { height: var(--g-h, 52mm); }
+  .gallery figcaption { font-size: 9pt; color: var(--muted); margin-top: 1.5mm; text-align: center; }
+
   /* ---- Clients / testimonials ---- */
   .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
   .client { background: var(--bg); border-radius: 6px; padding: 3mm; text-align: center; font-size: 10.5pt; font-weight: 500; }
@@ -505,6 +512,29 @@
   {% endif %}
   <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
 </section>
+{% endif %}
+
+{# ================= 활동 사진 ================= #}
+{% if gallery.photos %}
+{% for chunk in gallery.photos|batch(gallery.per_page) %}
+<section class="page">
+  <h2 class="section-title">{{ gallery.heading or '활동 사진' }} <small>{{ gallery.en or 'Activity Photos' }}</small></h2>
+  {% if gallery.subtitle and loop.first %}<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">{{ gallery.subtitle }}</p>{% endif %}
+  {% set gc = 2 if chunk|length <= 4 else 3 %}
+  {% set rows = ((chunk|length + gc - 1) / gc)|int %}
+  {% set gh = 95 if rows == 1 else (72 if rows == 2 else 46) %}
+  <div class="gallery" style="--g-cols:{{ gc }};--g-h:{{ gh }}mm">
+    {% for ph in chunk %}
+    <figure>
+      {% if ph.src %}<img src="{{ ph.src }}" alt="{{ ph.caption or '활동 사진' }}">
+      {% else %}<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">{{ ph.path }}</div></div>{% endif %}
+      {% if ph.caption %}<figcaption>{{ ph.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+  </div>
+  <div class="page-footer"><span>{{ c.name }}</span><span>회사소개서</span></div>
+</section>
+{% endfor %}
 {% endif %}
 
 {# ================= 강사 소개 =================

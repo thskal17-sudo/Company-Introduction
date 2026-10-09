@@ -120,11 +120,23 @@ def normalize(raw: dict, base: Path) -> dict:
         p["photos"] = [slot(ph) for ph in p["photo_paths"]]
         programs.append(p)
     d["programs"] = programs
+    gallery = dict(d.get("gallery") or {})
+    items = []
+    for item in gallery.get("photos") or []:
+        if isinstance(item, str):
+            item = {"path": item}
+        item = dict(item)
+        sl = slot(item.get("path") or "")
+        item.update(src=sl["src"], missing=sl["missing"])
+        items.append(item)
+    gallery["photos"] = items
+    gallery["per_page"] = int(gallery.get("per_page") or 6)
+    d["gallery"] = gallery
+    d["closing"] = d.get("closing") or {}
     if placeholders:
         print(f"[안내] 아직 없는 사진 {len(placeholders)}장은 소개서에 '사진 자리'로 표시됩니다:", file=sys.stderr)
         for ph in placeholders:
             print(f"        {ph}", file=sys.stderr)
-    d["closing"] = d.get("closing") or {}
     d["generated_on"] = dt.date.today().strftime("%Y. %m")
     return d
 
@@ -417,6 +429,25 @@ def build_docx(data: dict, out: Path, base: Path) -> Path | None:
             heading(f"{i}. {s.get('title', '')}", 3)
             if s.get("description"):
                 doc.add_paragraph(s["description"])
+
+    # ---- 활동 사진
+    if data["gallery"].get("photos"):
+        doc.add_page_break()
+        heading(data["gallery"].get("heading") or "활동 사진", 1)
+        if data["gallery"].get("subtitle"):
+            doc.add_paragraph(data["gallery"]["subtitle"])
+        for ph in data["gallery"]["photos"]:
+            full = resolve(ph.get("path") or "", base)
+            if full:
+                doc.add_picture(str(full), width=Cm(8))
+                doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+                if ph.get("caption"):
+                    cap = doc.add_paragraph(ph["caption"]); cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    cap.runs[0].font.size = Pt(9)
+            elif ph.get("path"):
+                note = doc.add_paragraph()
+                r = note.add_run(f"[사진 자리] {ph['path']}")
+                r.italic = True; r.font.color.rgb = RGBColor(0x99, 0x99, 0x99)
 
     # ---- 강사
     if data["instructors"]:

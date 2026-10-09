@@ -258,6 +258,13 @@
   .ins-grid.nophoto .tg { justify-content: center; margin-top: 3mm; }
   .ins-grid.nophoto .one-line { text-align: center; }
 
+  /* ---- Gallery (활동 사진) ---- */
+  .gallery { display: grid; grid-template-columns: repeat(var(--g-cols, 3), 1fr); gap: 4mm; flex: 1; align-content: center; }
+  .gallery figure { margin: 0; }
+  .gallery img { width: 100%; height: var(--g-h, 52mm); object-fit: cover; border-radius: 6px; display: block; }
+  .gallery .photo-slot { height: var(--g-h, 52mm); }
+  .gallery figcaption { font-size: 9pt; color: var(--muted); margin-top: 1.5mm; text-align: center; }
+
   /* ---- Clients / testimonials ---- */
   .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
   .client { background: var(--bg); border-radius: 6px; padding: 3mm; text-align: center; font-size: 10.5pt; font-weight: 500; }
@@ -444,35 +451,24 @@
 
 
 <section class="page">
-  <h2 class="section-title">분야별 대표 강사 <small>Our Instructors</small></h2>
-<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다.</p>  <div class="ins-grid few nophoto" style="--ins-cols:4;--ins-ph:58mm">
-    <div class="ins-card">
-<div class="initial">박</div>
-      <div class="body">
-<span class="field">대표 · 자소서 · 창업</span>        <div class="nm">박서현</div>
-<div class="rl">대표 강사</div>      </div>
-    </div>
-    <div class="ins-card">
-<div class="initial">허</div>
-      <div class="body">
-<span class="field">이미지</span>        <div class="nm">허나영</div>
-<div class="rl">이미지 분야 대표 강사</div>      </div>
-    </div>
-    <div class="ins-card">
-<div class="initial">이</div>
-      <div class="body">
-<span class="field">스피치</span>        <div class="nm">이석희</div>
-<div class="rl">스피치 분야 대표 강사</div>      </div>
-    </div>
-    <div class="ins-card">
-<div class="initial">강</div>
-      <div class="body">
-<span class="field">AI</span>        <div class="nm">강명주</div>
-<div class="rl">AI 분야 대표 강사</div>      </div>
-    </div>
+  <h2 class="section-title">활동 사진 <small>Activity Photos</small></h2>
+<p class="lead" style="font-size:10.5pt;margin:-3mm 0 5mm">교육 현장에서 학생들이 직접 해보고 만들어 낸 순간들입니다.</p>  <div class="gallery" style="--g-cols:3;--g-h:72mm">
+    <figure>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/activity/activity-1.jpg</div></div>    </figure>
+    <figure>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/activity/activity-2.jpg</div></div>    </figure>
+    <figure>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/activity/activity-3.jpg</div></div>    </figure>
+    <figure>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/activity/activity-4.jpg</div></div>    </figure>
+    <figure>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/activity/activity-5.jpg</div></div>    </figure>
+    <figure>
+<div class="photo-slot"><div class="ps-icon">▨</div><div class="ps-label">사진 자리</div><div class="ps-file">assets/activity/activity-6.jpg</div></div>    </figure>
   </div>
   <div class="page-footer"><span>한국엑스퍼트교육원</span><span>회사소개서</span></div>
 </section>
+
 
 
 <section class="page backcover">

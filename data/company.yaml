@@ -218,54 +218,43 @@ programs:
 # 차별화 포인트 (없으면 비워 두세요)
 strengths: []
 
-# 강사 소개 — 분야별 대표 강사
-#  - field: 카드 위에 주황색 배지로 표시되는 분야 이름
-#  - quote: 한 줄 소개 문구 (선택) / career, certifications 는 카드 폭에 맞춰 길면 줄임표로 잘립니다.
-#  - 사진은 assets/instructors/ 에 아래 파일명으로 넣어 주세요. 세로 사진(3:4)을 권장합니다.
-instructors_heading: "분야별 대표 강사"
-instructors_subtitle: "분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다."
-instructors_layout: "grid"        # grid(한 페이지에 카드로) / detail(한 명씩 자세히) / auto
-instructors:
-  - field: "대표 · 자소서 · 창업"
-    name: "박서현"
-    title: "대표 강사"
-    photo: ""                       # 사진 파일: assets/instructors/daepyo.jpg
-    quote: ""
-    bio: ""
-    specialties: []
-    career: []
-    education: []
-    certifications: []
-  - field: "이미지"
-    name: "허나영"
-    title: "이미지 분야 대표 강사"
-    photo: ""                       # 사진 파일: assets/instructors/image.jpg
-    quote: ""
-    bio: ""
-    specialties: []
-    career: []
-    education: []
-    certifications: []
-  - field: "스피치"
-    name: "이석희"
-    title: "스피치 분야 대표 강사"
-    photo: ""                       # 사진 파일: assets/instructors/speech.jpg
-    quote: ""
-    bio: ""
-    specialties: []
-    career: []
-    education: []
-    certifications: []
-  - field: "AI"
-    name: "강명주"
-    title: "AI 분야 대표 강사"
-    photo: ""                       # 사진 파일: assets/instructors/ai.jpg
-    quote: ""
-    bio: ""
-    specialties: []
-    career: []
-    education: []
-    certifications: []
+# 활동 사진
+#  - assets/activity/ 에 파일을 넣고 아래 목록에 경로를 적으면 한 페이지에 모아 보여줍니다.
+#  - caption 은 생략해도 됩니다. per_page 는 한 페이지에 들어갈 장수입니다.
+#  - 4장 이하면 2열(크게), 5장 이상이면 3열로 배치됩니다.
+gallery:
+  heading: "활동 사진"
+  en: "Activity Photos"
+  subtitle: "교육 현장에서 학생들이 직접 해보고 만들어 낸 순간들입니다."
+  per_page: 6
+  photos:
+    - path: "assets/activity/activity-1.jpg"
+      caption: ""
+    - path: "assets/activity/activity-2.jpg"
+      caption: ""
+    - path: "assets/activity/activity-3.jpg"
+      caption: ""
+    - path: "assets/activity/activity-4.jpg"
+      caption: ""
+    - path: "assets/activity/activity-5.jpg"
+      caption: ""
+    - path: "assets/activity/activity-6.jpg"
+      caption: ""
+
+# 강사 소개 — 현재 소개서에서 제외되어 있습니다.
+#  - 다시 넣으려면 아래 instructors 목록에 강사를 적고, 필요하면 heading/subtitle 주석을 해제하세요.
+#  - 예시:
+#    - field: "대표 · 자소서 · 창업"
+#      name: "박서현"
+#      title: "대표 강사"
+#      photo: ""
+#      specialties: []
+#      career: []
+#      certifications: []
+# instructors_heading: "분야별 대표 강사"
+# instructors_subtitle: "분야마다 해당 분야를 책임지는 대표 강사가 교육을 진행합니다."
+instructors_layout: "grid"
+instructors: []
 
 # 주요 고객사 / 파트너 (없으면 비워 두세요)
 clients: []
