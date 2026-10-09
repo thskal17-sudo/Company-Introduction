@@ -229,17 +229,15 @@ gallery:
   per_page: 6
   photos:
     - path: "assets/activity/activity-1.jpg"
-      caption: ""
+      caption: "고등학교 취업역량강화 교육"
     - path: "assets/activity/activity-2.jpg"
-      caption: ""
+      caption: "수업을 마친 학생들"
     - path: "assets/activity/activity-3.jpg"
-      caption: ""
+      caption: "진로·취업 워크시트 작성"
     - path: "assets/activity/activity-4.jpg"
-      caption: ""
+      caption: "팀 활동 중심 직업체험"
     - path: "assets/activity/activity-5.jpg"
-      caption: ""
-    - path: "assets/activity/activity-6.jpg"
-      caption: ""
+      caption: "조별 발표와 피드백"
 
 # 강사 소개 — 현재 소개서에서 제외되어 있습니다.
 #  - 다시 넣으려면 아래 instructors 목록에 강사를 적고, 필요하면 heading/subtitle 주석을 해제하세요.
